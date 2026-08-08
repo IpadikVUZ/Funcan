@@ -1,0 +1,605 @@
+\subsection{Операторнозначные функции комплексного переменного. Аналитичность резольвенты. Спектральный радиус. Основная теорема о спектре}
+
+\begin{definition}[Операторнозначная функция комплексного переменного]
+	Пусть \(E\) --- банахово пространство над \(\mathbb{C}\), а \(D\subset\mathbb{C}\).
+	Отображение
+	\[
+	F:D\to\mathcal{L}(E)
+	\]
+	называется \textbf{операторнозначной функцией комплексного переменного}.
+\end{definition}
+
+\begin{definition}[Аналитичность операторнозначной функции]
+	Функция
+	\[
+	F:D\to\mathcal{L}(E)
+	\]
+	называется \textbf{аналитической} в точке \(\lambda_0\in D\), если существует предел
+	\[
+	F'(\lambda_0)
+	=
+	\lim_{\lambda\to\lambda_0}
+	\frac{F(\lambda)-F(\lambda_0)}{\lambda-\lambda_0}
+	\]
+	в норме пространства \(\mathcal{L}(E)\).
+	
+	Если \(F\) аналитична в каждой точке области \(D\), то \(F\) называется аналитической в \(D\).
+\end{definition}
+
+
+\begin{definition}[Резольвентное множество, резольвента и спектр]
+	Пусть \(E\) --- комплексное банахово пространство,
+	\[
+	A\in\mathcal{L}(E).
+	\]
+	Для \(\lambda\in\mathbb{C}\) обозначим
+	\[
+	A_\lambda=A-\lambda I.
+	\]
+	
+	Число \(\lambda\in\mathbb{C}\) называется \textbf{регулярным значением} оператора \(A\), если оператор
+	\[
+	A_\lambda=A-\lambda I
+	\]
+	непрерывно обратим, то есть
+	\[
+	A_\lambda^{-1}\in\mathcal{L}(E).
+	\]
+	
+	\textbf{Резольвентным множеством} называется множество
+	\[
+	\rho(A)=\{\lambda\in\mathbb{C}: A_\lambda^{-1}\in\mathcal{L}(E)\}.
+	\]
+	
+	Для \(\lambda\in\rho(A)\) оператор
+	\[
+	R_\lambda=R_\lambda(A)=(A-\lambda I)^{-1}
+	\]
+	называется \textbf{резольвентой} оператора \(A\).
+	
+	\textbf{Спектром} оператора \(A\) называется множество
+	\[
+	\sigma(A)=\mathbb{C}\setminus\rho(A).
+	\]
+\end{definition}
+
+\begin{definition}[Спектральный радиус]
+	Спектральным радиусом оператора \(A\) называется число
+	\[
+	r(A)=\sup_{\lambda\in\sigma(A)}|\lambda|.
+	\]
+\end{definition}
+
+\begin{proposition}[Резольвента вне круга радиуса \(\|A\|\)]
+	Если
+	\[
+	|\lambda|>\|A\|,
+	\]
+	то
+	\[
+	\lambda\in\rho(A),
+	\]
+	причём
+	\[
+	R_\lambda
+	=
+	-\frac{1}{\lambda}
+	\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
+	\]
+\end{proposition}
+
+\begin{proof}
+	\textbf{1. Сведение к ряду Неймана.}
+	
+	Имеем
+	\[
+	A-\lambda I
+	=
+	-\lambda\left(I-\frac{1}{\lambda}A\right).
+	\]
+	Так как
+	\[
+	\left\|\frac{1}{\lambda}A\right\|
+	=
+	\frac{\|A\|}{|\lambda|}
+	<1,
+	\]
+	то по теореме о ряде Неймана оператор
+	\[
+	I-\frac{1}{\lambda}A
+	\]
+	обратим, и
+	\[
+	\left(I-\frac{1}{\lambda}A\right)^{-1}
+	=
+	\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
+	\]
+	
+	\textbf{2. Формула для резольвенты.}
+	
+	Из разложения
+	\[
+	A-\lambda I
+	=
+	-\lambda\left(I-\frac{1}{\lambda}A\right)
+	\]
+	получаем
+	\[
+	(A-\lambda I)^{-1}
+	=
+	-\frac{1}{\lambda}
+	\left(I-\frac{1}{\lambda}A\right)^{-1}.
+	\]
+	Следовательно,
+	\[
+	R_\lambda
+	=
+	-\frac{1}{\lambda}
+	\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
+	\]
+	Значит,
+	\[
+	\lambda\in\rho(A).
+	\]
+\end{proof}
+
+\begin{corollary}
+	Спектр оператора \(A\) лежит в замкнутом круге:
+	\[
+	\sigma(A)\subset\{\lambda\in\mathbb{C}:|\lambda|\leqslant \|A\|\}.
+	\]
+\end{corollary}
+
+\begin{theorem}[Аналитичность резольвенты]
+	Резольвентное множество \(\rho(A)\) открыто, а функция
+	\[
+	R_\lambda=(A-\lambda I)^{-1}
+	\]
+	аналитична на \(\rho(A)\). Более того,
+	\[
+	R'_\lambda=R_\lambda^2.
+	\]
+\end{theorem}
+
+\begin{proof}
+	\textbf{1. Открытость резольвентного множества.}
+	
+	Возьмём произвольную точку
+	\[
+	\lambda_0\in\rho(A).
+	\]
+	Тогда оператор
+	\[
+	R_{\lambda_0}=(A-\lambda_0I)^{-1}
+	\]
+	существует и ограничен.
+	
+	Пусть \(\lambda\) близко к \(\lambda_0\). Обозначим
+	\[
+	\delta=\lambda-\lambda_0.
+	\]
+	Тогда
+	\[
+	A-\lambda I
+	=
+	A-\lambda_0I-\delta I
+	=
+	(A-\lambda_0I)(I-\delta R_{\lambda_0}).
+	\]
+	Если
+	\[
+	|\delta|\mathbb{C}dot\|R_{\lambda_0}\|<1,
+	\]
+	то по теореме о ряде Неймана оператор
+	\[
+	I-\delta R_{\lambda_0}
+	\]
+	обратим. Значит, обратим и оператор \(A-\lambda I\).
+	
+	Следовательно, при
+	\[
+	|\lambda-\lambda_0|<\frac{1}{\|R_{\lambda_0}\|}
+	\]
+	имеем
+	\[
+	\lambda\in\rho(A).
+	\]
+	Значит, \(\rho(A)\) открыто.
+	
+	\textbf{2. Локальное разложение резольвенты.}
+	
+	Из равенства
+	\[
+	A-\lambda I
+	=
+	(A-\lambda_0I)(I-(\lambda-\lambda_0)R_{\lambda_0})
+	\]
+	получаем
+	\[
+	R_\lambda
+	=
+	(I-(\lambda-\lambda_0)R_{\lambda_0})^{-1}R_{\lambda_0}.
+	\]
+	При
+	\[
+	|\lambda-\lambda_0|\mathbb{C}dot\|R_{\lambda_0}\|<1
+	\]
+	по ряду Неймана:
+	\[
+	(I-(\lambda-\lambda_0)R_{\lambda_0})^{-1}
+	=
+	\sum_{n=0}^{\infty}(\lambda-\lambda_0)^nR_{\lambda_0}^n.
+	\]
+	Следовательно,
+	\[
+	R_\lambda
+	=
+	\sum_{n=0}^{\infty}(\lambda-\lambda_0)^nR_{\lambda_0}^{n+1}.
+	\]
+	Это степенной ряд по \(\lambda-\lambda_0\) со значениями в \(\mathcal{L}(E)\). Поэтому
+	\[
+	\lambda\mapsto R_\lambda
+	\]
+	аналитична в окрестности \(\lambda_0\).
+	
+	\textbf{3. Формула для производной.}
+	
+	Из локального разложения сразу получаем
+	\[
+	R'_{\lambda_0}=R_{\lambda_0}^2.
+	\]
+	Так как \(\lambda_0\in\rho(A)\) была произвольной,
+	\[
+	R'_\lambda=R_\lambda^2
+	\qquad
+	\forall\lambda\in\rho(A).
+	\]
+\end{proof}
+
+\begin{remark}[Равенство Гильберта для резольвенты]
+	Если
+	\[
+	\lambda,\mu\in\rho(A),
+	\]
+	то
+	\[
+	R_\lambda-R_\mu
+	=
+	(\lambda-\mu)R_\lambda R_\mu.
+	\]
+	
+	Действительно,
+	\[
+	R_\lambda-R_\mu
+	=
+	R_\lambda R_\mu^{-1}R_\mu
+	-
+	R_\lambda R_\lambda^{-1}R_\mu
+	=
+	R_\lambda(R_\mu^{-1}-R_\lambda^{-1})R_\mu.
+	\]
+	Но
+	\[
+	R_\mu^{-1}=A-\mu I,
+	\qquad
+	R_\lambda^{-1}=A-\lambda I.
+	\]
+	Значит,
+	\[
+	R_\mu^{-1}-R_\lambda^{-1}
+	=
+	(A-\mu I)-(A-\lambda I)
+	=
+	(\lambda-\mu)I.
+	\]
+	Следовательно,
+	\[
+	R_\lambda-R_\mu
+	=
+	(\lambda-\mu)R_\lambda R_\mu.
+	\]
+\end{remark}
+
+\begin{theorem}[Основная теорема о спектре]
+	Пусть \(E\) --- комплексное банахово пространство и
+	\[
+	A\in\mathcal{L}(E).
+	\]
+	Тогда:
+	\begin{itemize}
+		\item спектр \(\sigma(A)\) --- непустой компакт;
+		\item спектральный радиус задаётся формулой
+		\[
+		r(A)
+		=
+		\lim_{n\to\infty}\sqrt[n]{\|A^n\|}.
+		\]
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	\textbf{1. Замкнутость и ограниченность спектра.}
+	
+	Из предыдущего утверждения знаем, что
+	\[
+	\rho(A)
+	\]
+	открыто. Поэтому его дополнение
+	\[
+	\sigma(A)=\mathbb{C}\setminus\rho(A)
+	\]
+	замкнуто.
+	
+	Кроме того, если
+	\[
+	|\lambda|>\|A\|,
+	\]
+	то
+	\[
+	\lambda\in\rho(A).
+	\]
+	Значит,
+	\[
+	\sigma(A)\subset\{\lambda\in\mathbb{C}:|\lambda|\leqslant\|A\|\}.
+	\]
+	Следовательно, \(\sigma(A)\) замкнуто и ограничено. Если оно непусто, то оно компактно.
+	
+	Осталось доказать непустоту.
+	
+	\textbf{2. Непустота спектра.}
+	
+	Докажем от противного. Пусть
+	\[
+	\sigma(A)=\varnothing.
+	\]
+	Тогда
+	\[
+	\rho(A)=\mathbb{C},
+	\]
+	то есть резольвента
+	\[
+	R_\lambda=(A-\lambda I)^{-1}
+	\]
+	определена и аналитична на всей комплексной плоскости.
+	
+	При \(|\lambda|>\|A\|\) уже есть формула
+	\[
+	R_\lambda
+	=
+	-\frac{1}{\lambda}
+	\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
+	\]
+	Поэтому
+	\[
+	\|R_\lambda\|
+	\leqslant
+	\frac{1}{|\lambda|}
+	\sum_{n=0}^{\infty}
+	\frac{\|A\|^n}{|\lambda|^n}
+	=
+	\frac{1}{|\lambda|}
+	\mathbb{C}dot
+	\frac{1}{1-\frac{\|A\|}{|\lambda|}}
+	=
+	\frac{1}{|\lambda|-\|A\|}.
+	\]
+	Отсюда
+	\[
+	\|R_\lambda\|\to0
+	\qquad
+	\text{при }|\lambda|\to\infty.
+	\]
+	
+	Значит, \(R_\lambda\) ограничена вне большого круга. Внутри этого круга она ограничена по
+	непрерывности на компакте. Следовательно, \(R_\lambda\) ограничена на всей \(\mathbb{C}\).
+	
+	По теореме Лиувилля для операторнозначных функций \(R_\lambda\) постоянна. Так как
+	\[
+	R_\lambda\to0
+	\qquad
+	|\lambda|\to\infty,
+	\]
+	эта постоянная равна нулю:
+	\[
+	R_\lambda\equiv0.
+	\]
+	Но \(R_\lambda\) является обратным оператором к \(A-\lambda I\), значит не может быть нулевым
+	оператором. Получили противоречие.
+	
+	Следовательно,
+	\[
+	\sigma(A)\ne\varnothing.
+	\]
+	Значит, \(\sigma(A)\) --- непустой компакт.
+	
+	\textbf{3. Формула спектрального радиуса.}
+	
+	Обозначим
+	\[
+	L=\lim_{n\to\infty}\sqrt[n]{\|A^n\|}.
+	\]
+	Предел существует по стандартной лемме для субмультипликативной последовательности,
+	поскольку
+	\[
+	\|A^{n+m}\|\leqslant\|A^n\|\mathbb{C}dot\|A^m\|.
+	\]
+	
+	Докажем, что
+	\[
+	r(A)=L.
+	\]
+	
+	\begin{itemize}
+		\item \textbf{Оценка \(r(A)\leqslant L\).}
+		
+		Пусть
+		\[
+		\lambda\in\sigma(A).
+		\]
+		Тогда для любого \(n\in\mathbb{N}\)
+		\[
+		\lambda^n\in\sigma(A^n).
+		\]
+		Действительно, если бы \(A^n-\lambda^nI\) был обратим, то из разложения
+		\[
+		A^n-\lambda^nI
+		=
+		(A-\lambda I)
+		(A^{n-1}+\lambda A^{n-2}+\ldots+\lambda^{n-1}I)
+		\]
+		и коммутативности множителей следовала бы обратимость \(A-\lambda I\), что противоречит
+		\[
+		\lambda\in\sigma(A).
+		\]
+		
+		Так как спектр любого ограниченного оператора лежит в круге радиуса его нормы, то
+		\[
+		|\lambda|^n
+		=
+		|\lambda^n|
+		\leqslant
+		\|A^n\|.
+		\]
+		Следовательно,
+		\[
+		|\lambda|
+		\leqslant
+		\sqrt[n]{\|A^n\|}
+		\qquad
+		\forall n.
+		\]
+		Переходя к пределу по \(n\), получаем
+		\[
+		|\lambda|\leqslant L.
+		\]
+		Так как \(\lambda\in\sigma(A)\) произвольно,
+		\[
+		r(A)\leqslant L.
+		\]
+		
+		\item \textbf{Оценка \(L\leqslant r(A)\).}
+		
+		Для \(|\lambda|>\|A\|\) мы знаем разложение
+		\[
+		R_\lambda
+		=
+		-\frac{1}{\lambda}
+		\sum_{n=0}^{\infty}
+		\frac{A^n}{\lambda^n}.
+		\]
+		Это ряд Лорана резольвенты в окрестности бесконечности.
+		
+		Так как резольвента аналитична на \(\rho(A)\), а
+		\[
+		\sigma(A)\subset\{\lambda:|\lambda|\leqslant r(A)\},
+		\]
+		то \(R_\lambda\) аналитична во всей внешности круга
+		\[
+		|\lambda|>r(A).
+		\]
+		По единственности ряда Лорана указанное разложение является лорановским разложением
+		резольвенты во всей этой внешней области.
+		
+		Значит, ряд
+		\[
+		\sum_{n=0}^{\infty}
+		\frac{A^n}{\lambda^{n+1}}
+		\]
+		сходится при каждом
+		\[
+		|\lambda|>r(A).
+		\]
+		Возьмём любое число \(s>r(A)\) и положим \(|\lambda|=s\). Из сходимости ряда следует, что
+		его общий член стремится к нулю:
+		\[
+		\left\|
+		\frac{A^n}{\lambda^{n+1}}
+		\right\|
+		=
+		\frac{\|A^n\|}{s^{n+1}}
+		\to0.
+		\]
+		Отсюда
+		\[
+		\limsup_{n\to\infty}\sqrt[n]{\frac{\|A^n\|}{s^{n+1}}}
+		\leqslant1.
+		\]
+		То есть
+		\[
+		L\leqslant s.
+		\]
+		Так как это верно для любого \(s>r(A)\), получаем
+		\[
+		L\leqslant r(A).
+		\]
+	\end{itemize}
+	
+	Из двух оценок следует
+	\[
+	r(A)=L.
+	\]
+	То есть
+	\[
+	r(A)
+	=
+	\lim_{n\to\infty}\sqrt[n]{\|A^n\|}.
+	\]
+\end{proof}
+
+\begin{idea}[Скелет билета]
+	\begin{itemize}
+		\item Для \(\lambda\in\mathbb{C}\) рассматриваем
+		\[
+		A_\lambda=A-\lambda I.
+		\]
+		
+		\item Резольвентное множество:
+		\[
+		\rho(A)=\{\lambda: A_\lambda^{-1}\in\mathcal{L}(E)\}.
+		\]
+		
+		\item Резольвента:
+		\[
+		R_\lambda=(A-\lambda I)^{-1}.
+		\]
+		
+		\item Спектр:
+		\[
+		\sigma(A)=\mathbb{C}\setminus\rho(A).
+		\]
+		
+		\item Если \(|\lambda|>\|A\|\), то
+		\[
+		R_\lambda
+		=
+		-\frac{1}{\lambda}
+		\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
+		\]
+		Значит,
+		\[
+		\sigma(A)\subset\{|\lambda|\leqslant\|A\|\}.
+		\]
+		
+		\item \(\rho(A)\) открыто, потому что обратимость сохраняется при малом возмущении:
+		\[
+		A-\lambda I
+		=
+		(A-\lambda_0I)(I-(\lambda-\lambda_0)R_{\lambda_0}).
+		\]
+		
+		\item Резольвента аналитична, потому что локально раскладывается в ряд Неймана:
+		\[
+		R_\lambda
+		=
+		\sum_{n=0}^{\infty}
+		(\lambda-\lambda_0)^nR_{\lambda_0}^{n+1}.
+		\]
+		
+		\item Основная теорема:
+		\[
+		\sigma(A)\text{ --- непустой компакт},
+		\qquad
+		r(A)=\lim_{n\to\infty}\sqrt[n]{\|A^n\|}.
+		\]
+	\end{itemize}
+\end{idea}

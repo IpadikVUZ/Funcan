@@ -1,0 +1,115 @@
+% --- Содержимое файла materials/5_2.tex ---
+\subsection{Эквивалентность норм в конечномерном пространстве. Понятие линейного топологического пространства, примеры}
+\begin{definition}[Линейное пространство]
+	Непустое множество $L$ называется \textbf{линейным пространством} над полем $\mathbb{K}$, если оно удовлетворяет следующим условиям:
+	\begin{enumerate}
+		\item Для любых $x, y \in L$ однозначно определена сумма $x + y \in L$:
+		\begin{enumerate}
+			\item $x + y = y + x$ (коммутативность);
+			\item $x + (y + z) = (x + y) + z$ (ассоциативность);
+			\item $\exists 0 \in L : \forall x \in L \Rightarrow x + 0 = x$ (существование нуля);
+			\item $\forall x \in L, \exists (-x) \in L : x + (-x) = 0$ (существование обратного элемента).
+		\end{enumerate}
+		\item Для любого $\alpha \in \mathbb{K}$ и $x \in L$ определено произведение $\alpha x \in L$:
+		\begin{enumerate}
+			\item $\alpha (\beta x) = (\alpha \beta) x$ (ассоциативность умножения);
+			\item $1 \cdot x = x$ (унитарность);
+			\item $(\alpha + \beta) x = \alpha x + \beta x$ (дистрибутивность по скалярам);
+			\item $\alpha (x + y) = \alpha x + \alpha y$ (дистрибутивность по векторам).
+		\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Изоморфизмы]
+	\begin{itemize}
+		\item Линейные пространства $L$ и $L^*$ называются \textbf{изоморфными}, если существует биекция $f: L \to L^*$, сохраняющая линейные операции:
+		\[ x \leftrightarrow x^*, y \leftrightarrow y^* \implies x+y \leftrightarrow x^*+y^*, \quad \alpha x \leftrightarrow \alpha x^*. \]
+		\item Евклидовы пространства $E$ и $E^*$ называются \textbf{изоморфными}, если они изоморфны как линейные и сохраняют скалярное произведение:
+		\[ x \leftrightarrow x^*, y \leftrightarrow y^* \implies (x, y)_E = (x^*, y^*)_{E^*}. \]
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Смежные определения (нормированного пространства, скалярного произведения) сформулированы в билете №7.
+\end{remark}
+
+\begin{example}[Эквивалентные нормы в пространстве функций]
+	Рассмотрим $X = \{u \in C^1[0, 1] : u(0) = 0\}$. Введем две нормы:
+	\[ \|u\|_1 = \left(\int_0^1 (u^2 + (u')^2) dx\right)^{1/2}, \quad \|u\|_2 = \left(\int_0^1 (u')^2 dx\right)^{1/2} \]
+	Докажем их эквивалентность ($C_1 \|u\|_2 \leqslant \|u\|_1 \leqslant C_2 \|u\|_2$).
+	\begin{enumerate}
+		\item Очевидно, что $\|u\|_2 \leqslant \|u\|_1$ (так как подынтегральное выражение первой нормы больше).
+		\item Для обратного неравенства используем $u(0)=0$: $u(x) = \int_0^x u'(t) dt$.
+		\item Возведем в квадрат и применим неравенство Коши-Буняковского:
+		\[ u^2(x) = \left(\int_0^x 1 \cdot u'(t)dt \right)^2 \leqslant \left(\int_0^x 1^2 dt\right) \left(\int_0^x (u'(t))^2 dt\right) \leqslant x \cdot \|u\|_2^2 \leqslant \|u\|_2^2. \]
+		\item Интегрируем по $x$ от 0 до 1:
+		\[ \int_0^1 u^2(x) dx \leqslant \int_0^1 \|u\|_2^2 dx = \|u\|_2^2. \]
+		\item Итого: $\|u\|_1^2 = \int u^2 + \int (u')^2 \leqslant \|u\|_2^2 + \|u\|_2^2 = 2\|u\|_2^2$.
+		Отсюда $\|u\|_1 \leqslant \sqrt{2}\|u\|_2$. Нормы эквивалентны.
+	\end{enumerate}
+\end{example}
+
+
+
+\begin{example}[Неэквивалентные нормы]
+	Рассмотрим $C[a, b]$ с нормами $\|x\|_C = \max |x(t)|$ и $\|x\|_1 = \int_a^b |x(t)| dt$.
+	\begin{itemize}
+		\item Неравенство $\|x\|_1 \leqslant (b-a)\|x\|_C$ выполнено всегда.
+		\item Обратное неравенство невозможно. Построим последовательность «пиков»:
+		\[
+		x_n(t) = \begin{cases} 
+			2n^2(t-a), & t \in [a, a + \frac{1}{2n}] \\
+			2n - 2n^2(t - (a+\frac{1}{2n})), & t \in [a+\frac{1}{2n}, a+\frac{1}{n}] \\
+			0, & \text{иначе}
+		\end{cases}
+		\]
+		Площадь под графиком (интеграл) $\|x_n\|_1 = \frac{1}{2} \cdot \frac{1}{n} \cdot 2n = 1$ (константа).
+		Максимум модуля $\|x_n\|_C = 2n \to \infty$.
+		Константы $K$, такой что $2n \leqslant K \cdot 1$ для всех $n$, не существует.
+	\end{itemize}
+\end{example}
+
+
+
+\begin{proposition}[Эквивалентность норм в конечномерном пространстве]\label{normequiv}
+	Пусть $E$ --- ЛНП и $\dim E < +\infty$. Тогда любые две нормы на $E$ эквивалентны.
+\end{proposition}
+
+
+
+\begin{proof}
+	Выберем базис $e = \{e_1, \dots, e_n\}$. Любой $x$ задается столбцом координат $\alpha$.
+	Введем \textit{евклидову норму}: $\|x\|_{euc} := \sqrt{\sum \alpha_k^2}$.
+	Докажем эквивалентность произвольной нормы $\|\cdot\|$ и $\|\cdot\|_{euc}$.
+	
+	\begin{enumerate}
+		\item \textbf{Оценка сверху} ($\|\cdot\| \leqslant C \|\cdot\|_{euc}$).
+		\[ \|x\| = \left\| \sum \alpha_k e_k \right\| \leqslant \sum |\alpha_k| \|e_k\| \leqslant \left(\max \|e_k\|\right) \sum |\alpha_k|. \]
+		Используя неравенство Коши для сумм ($\sum |\alpha_k| \leqslant \sqrt{n} \sqrt{\sum \alpha_k^2}$), получаем $C = \sqrt{n} \max \|e_k\|$.
+		
+		\item \textbf{Оценка снизу} ($\|\cdot\|_{euc} \leqslant \widetilde{C} \|\cdot\|$). Докажем от противного.
+		\begin{itemize}
+			\item Пусть константы не существует. Тогда $\forall n \in \mathbb{N} \exists x_n$: $\|x_n\|_{euc} > n \|x_n\|$.
+			\item Нормируем векторы: пусть $y_n = x_n / \|x_n\|_{euc}$. Тогда $\|y_n\|_{euc} = 1$, а $\|y_n\| < 1/n$.
+			\item Единичная сфера в евклидовом пространстве компактна. Выделим сходящуюся подпоследовательность: $y_{n_k} \xrightarrow{\|\cdot\|_{euc}} y_0$, где $\|y_0\|_{euc} = 1$.
+			\item В силу пункта (1), сходимость по евклидовой норме влечет сходимость по норме $\|\cdot\|$:
+			\[ \|y_{n_k} - y_0\| \leqslant C \|y_{n_k} - y_0\|_{euc} \to 0. \]
+			\item Значит, $\|y_{n_k}\| \to \|y_0\|$. Но по построению $\|y_{n_k}\| < 1/n_k \to 0$.
+			\item Получаем $\|y_0\| = 0 \Rightarrow y_0 = 0$.
+			\item \textbf{Противоречие:} $\|y_0\|_{euc} = 1 \neq 0$.
+		\end{itemize}
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}\label{closeness-subspace}
+	Любое конечномерное подпространство $L \subset E$ замкнуто.
+\end{corollary}
+
+\begin{proof}
+	Так как $\dim L < \infty$, все нормы на нем эквивалентны. Относительно евклидовой нормы $L$ изоморфно $\mathbb{R}^n$, а $\mathbb{R}^n$ полно.
+	Полное подпространство в метрическом пространстве всегда замкнуто.
+\end{proof}
+
+\begin{definition}[Линейное топологическое пространство]
+	Топологическое пространство $X$ над полем $\mathbb{K}$, в котором операции сложения и умножения на скаляр непрерывны.
+\end{definition}

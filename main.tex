@@ -1,0 +1,208 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{cmap}
+% --- Кодировки и шрифты ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1, T2A]{fontenc} 
+\usepackage[russian]{babel}
+
+% --- Математические пакеты ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+
+% --- Настройка полей ---
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+% --- Гиперссылки ---
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% --- ДОБАВЛЕННЫЕ ПАКЕТЫ ДЛЯ ОФОРМЛЕНИЯ ---
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most]{tcolorbox}
+
+% --- КОЛОНТИТУЛЫ (НАВИГАЦИЯ) ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{15pt}
+
+% Команда для обновления кнопок
+\newcommand{\setupnav}[2]{
+	\fancyhead[L]{\hyperlink{toc}{\textbf{[Меню]}}}
+	\fancyhead[R]{
+		\ifx&#1& \textcolor{gray}{[$\leftarrow$ Назад]} \else \hyperlink{bilet#1}{[$\leftarrow$ Назад]} \fi
+		\quad | \quad
+		\ifx&#2& \textcolor{gray}{[Вперед $\rightarrow$]} \else \hyperlink{bilet#2}{[Вперед $\rightarrow$]} \fi
+	}
+}
+\fancyfoot[C]{\thepage}
+
+% --- ЦВЕТА ---
+\definecolor{defmyorange}{RGB}{255, 140, 0}
+\definecolor{thmblue}{RGB}{0, 102, 204}
+\definecolor{proofpurp}{RGB}{128, 0, 128}
+\definecolor{highlighter}{RGB}{255, 215, 0}
+\definecolor{exgray}{RGB}{100, 100, 100}
+
+% --- Определение окружений ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{proposition}[theorem]{Утверждение}
+\newtheorem{corollary}[theorem]{Следствие}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Замечание}[section]
+\newtheorem*{idea}{Идея доказательства}
+
+% --- МАГИЯ ПЕРЕОПРЕДЕЛЕНИЯ ---
+\renewenvironment{definition}[1][]{
+	\begin{tcolorbox}[enhanced, colback=defmyorange!5, colframe=defmyorange, coltitle=white, fonttitle=\bfseries, title={Определение: #1}, attach boxed title to top left={yshift=-2mm, xshift=2mm}, boxed title style={colback=defmyorange, sharp corners}, sharp corners, top=12pt, breakable]
+	}{\end{tcolorbox}}
+
+\renewenvironment{theorem}[1][]{
+	\begin{tcolorbox}[enhanced, colback=thmblue!5, colframe=thmblue, fonttitle=\bfseries, title={Теорема #1}, sharp corners=south, drop shadow, breakable]
+	}{\end{tcolorbox}}
+
+\renewenvironment{lemma}[1][]{
+	\begin{tcolorbox}[enhanced, colback=thmblue!5, colframe=thmblue, fonttitle=\bfseries, title={Лемма #1}, sharp corners=south, breakable]
+	}{\end{tcolorbox}}
+
+\renewenvironment{proposition}[1][]{
+	\begin{tcolorbox}[enhanced, colback=thmblue!5, colframe=thmblue, fonttitle=\bfseries, title={Утверждение #1}, sharp corners=south, breakable]
+	}{\end{tcolorbox}}
+
+\renewenvironment{corollary}[1][]{
+	\begin{tcolorbox}[enhanced, colback=thmblue!2, colframe=thmblue!70, fonttitle=\bfseries, title={Следствие #1}, sharp corners, breakable]
+	}{\end{tcolorbox}}
+
+\renewenvironment{proof}{
+	\begin{tcolorbox}[
+		enhanced, 
+		breakable, 
+		colback=proofpurp!2,    % Светлый фон
+		colframe=proofpurp,     % Цвет рамки
+		coltitle=white,         % Цвет текста в заголовке
+		fonttitle=\bfseries, 
+		title={Доказательство}, % Заголовок в рамке
+		sharp corners,          % Острые углы как у теорем
+		boxrule=1pt,            % Толщина рамки
+		toptitle=2mm,           % Отступы в заголовке
+		bottomtitle=2mm
+		]
+	}{\qed \end{tcolorbox}}
+
+\renewenvironment{example}[1][]{
+	\begin{tcolorbox}[enhanced, colback=exgray!5, colframe=exgray, fonttitle=\bfseries, title={Пример #1}, sharp corners, boxrule=0.5pt, breakable]
+	}{\end{tcolorbox}}
+
+\renewenvironment{remark}[1][]{
+	\begin{tcolorbox}[
+		enhanced,
+		breakable,
+		colback=exgray!4,
+		colframe=exgray,
+		fonttitle=\bfseries,
+		title={Замечание #1},
+		sharp corners,
+		boxrule=0.5pt
+		]
+	}{
+	\end{tcolorbox}
+}
+
+\setcounter{tocdepth}{2}
+
+
+% --- НОВЫЙ ЦВЕТ ДЛЯ ИДЕИ ---
+\definecolor{ideared}{RGB}{196, 30, 58} % Красивый красный (кардинал)
+
+% --- МАГИЯ ПЕРЕОПРЕДЕЛЕНИЯ IDEA ---
+\renewenvironment{idea}[1][]{
+	\begin{tcolorbox}[
+		enhanced,
+		breakable,
+		colback=ideared!5, 
+		colframe=ideared, 
+		borderline west={2pt}{0pt}{ideared},
+		coltitle=ideared,
+		fonttitle=\bfseries,
+		title={Идея доказательства: #1},
+		attach title to upper,
+		after title={\par\nobreak\vspace{1mm}},
+		sharp corners
+		]
+	}{\end{tcolorbox}}
+
+
+% --- Заголовок ---
+\title{Билеты по функциональному анализу--2}
+\author{}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	\hypertarget{toc}{} 
+	
+	\begin{abstract}
+		Билеты по функциональному анализу для подготовки к экзамену. Оформлено по разделам программы (2026).
+	\end{abstract}
+	
+	\tableofcontents
+	\newpage
+	
+	\setcounter{section}{6}
+	
+	% VII. СЛАБАЯ СХОДИМОСТЬ В БАНАХОВОМ ПРОСТРАНСТВЕ
+	\section{Слабая сходимость в банаховом пространстве}
+	\hypertarget{bilet1}{}\setupnav{}{2} \input{materials/7_1.tex}\newpage
+	\hypertarget{bilet2}{}\setupnav{1}{3} \input{materials/7_2.tex}\newpage
+	\hypertarget{bilet3}{}\setupnav{2}{4} \input{materials/7_3.tex}\newpage
+	
+	% VIII. ОБРАТНЫЙ ОПЕРАТОР. ОБРАТИМОСТЬ
+	\section{Обратный оператор. Обратимость}
+	\hypertarget{bilet4}{}\setupnav{3}{5} \input{materials/8_1.tex}\newpage
+	\hypertarget{bilet5}{}\setupnav{4}{6} \input{materials/8_2.tex}\newpage
+	\hypertarget{bilet6}{}\setupnav{5}{7} \input{materials/8_3.tex}\newpage
+	
+	% IX. СПЕКТР. РЕЗОЛЬВЕНТА
+	\section{Спектр. Резольвента}
+	\hypertarget{bilet7}{}\setupnav{6}{8} \input{materials/9_1.tex}\newpage
+	
+	% X. СОПРЯЖЕННЫЙ ОПЕРАТОР
+	\section{Сопряженный оператор}
+	\hypertarget{bilet8}{}\setupnav{7}{9} \input{materials/10_1.tex}\newpage
+	\hypertarget{bilet9}{}\setupnav{8}{10} \input{materials/10_2.tex}\newpage
+	
+	% XI. САМОСОПРЯЖЕННЫЕ ОПЕРАТОРЫ
+	\section{Самосопряженные операторы}
+	\hypertarget{bilet10}{}\setupnav{9}{11} \input{materials/11_1.tex}\newpage
+	\hypertarget{bilet11}{}\setupnav{10}{12} \input{materials/11_2.tex}\newpage
+	\hypertarget{bilet12}{}\setupnav{11}{13} \input{materials/11_3.tex}\newpage
+	\hypertarget{bilet13}{}\setupnav{12}{14} \input{materials/11_4.tex}\newpage
+	
+	% XII. КОМПАКТНЫЕ ОПЕРАТОРЫ
+	\section{Компактные операторы}
+	\hypertarget{bilet14}{}\setupnav{13}{15} \input{materials/12_1.tex}\newpage
+	\hypertarget{bilet15}{}\setupnav{14}{16} \input{materials/12_2.tex}\newpage
+	\hypertarget{bilet16}{}\setupnav{15}{17} \input{materials/12_3.tex}\newpage
+	\hypertarget{bilet17}{}\setupnav{16}{18} \input{materials/12_4.tex}\newpage
+	
+	% XIII. ЭЛЕМЕНТЫ НЕЛИНЕЙНОГО АНАЛИЗА
+	\section{Элементы нелинейного анализа}
+	\hypertarget{bilet18}{}\setupnav{17}{19} \input{materials/13_1.tex}\newpage
+	
+	% XIV. ПРЕОБРАЗОВАНИЕ ФУРЬЕ И СВЕРТКА В ПРОСТРАНСТВАХ $L_1(\MATHBB{R})$ И $L_2(\MATHBB{R})$
+	\section{Преобразование Фурье и свертка в пространствах $L_1(\mathbb{R})$ и $L_2(\mathbb{R})$}
+	\hypertarget{bilet19}{}\setupnav{18}{20} \input{materials/14_1.tex}\newpage
+	\hypertarget{bilet20}{}\setupnav{19}{} \input{materials/14_2.tex}\newpage
+	
+\end{document}

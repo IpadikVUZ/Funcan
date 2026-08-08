@@ -1,0 +1,136 @@
+\subsection{Разложение гильбертова пространства \texorpdfstring{\(H=\overline{\operatorname{Im}(A-\lambda I)}\oplus\ker(A-\lambda I)\)}{H = cl Im(A-lambda I) plus Ker(A-lambda I)}, где \texorpdfstring{\(A\)}{A} --- самосопряженный оператор}
+
+\begin{definition}[Оператор \(A_\lambda\)]
+	Пусть \(H\) --- гильбертово пространство над \(\mathbb{C}\),
+	\[
+	A\in\mathcal{L}(H),
+	\qquad
+	\lambda\in\mathbb{C}.
+	\]
+	Обозначим
+	\[
+	A_\lambda=A-\lambda I.
+	\]
+\end{definition}
+
+\begin{theorem}
+	Пусть \(H\) --- гильбертово пространство над \(\mathbb{C}\), и
+	\[
+	A\in\mathcal{L}(H)
+	\]
+	--- самосопряженный оператор. Тогда для любого \(\lambda\in\mathbb{C}\)
+	\[
+	H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda.
+	\]
+	То есть
+	\[
+	H
+	=
+	\overline{\operatorname{Im}(A-\lambda I)}
+	\oplus_{\perp}
+	\ker(A-\lambda I).
+	\]
+\end{theorem}
+
+\begin{proof}
+	Будем использовать разложение из билета 10.2:
+	\[
+	H=\overline{\operatorname{Im}B}\oplus_{\perp}\ker B^*
+	\]
+	для любого
+	\[
+	B\in\mathcal{L}(H).
+	\]
+	Применим его к оператору
+	\[
+	B=A_\lambda=A-\lambda I.
+	\]
+	Тогда
+	\[
+	H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda^*.
+	\]
+	Остаётся понять, почему в данном случае
+	\[
+	\ker A_\lambda^*=\ker A_\lambda.
+	\]
+	
+	\textbf{1. Случай \(\lambda\in\mathbb{R}\).}
+	
+	Так как \(A\) самосопряжен, то
+	\[
+	A^*=A.
+	\]
+	Кроме того,
+	\[
+	(\lambda I)^*=\overline{\lambda}I.
+	\]
+	Поэтому
+	\[
+	A_\lambda^*
+	=
+	(A-\lambda I)^*
+	=
+	A^*-\overline{\lambda}I
+	=
+	A-\overline{\lambda}I.
+	\]
+	Если \(\lambda\in\mathbb{R}\), то
+	\[
+	\overline{\lambda}=\lambda.
+	\]
+	Значит,
+	\[
+	A_\lambda^*=A-\lambda I=A_\lambda.
+	\]
+	Следовательно,
+	\[
+	\ker A_\lambda^*=\ker A_\lambda.
+	\]
+	Подставляя это в разложение из 10.2, получаем
+	\[
+	H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda.
+	\]
+	
+	\textbf{2. Случай \(\lambda\notin\mathbb{R}\).}
+	
+	По формуле выше
+	\[
+	A_\lambda^*=A-\overline{\lambda}I.
+	\]
+	Так как \(A\) самосопряжен, по билету 11.1 все собственные значения \(A\) вещественны.
+	
+	Но
+	\[
+	\lambda\notin\mathbb{R},
+	\qquad
+	\overline{\lambda}\notin\mathbb{R}.
+	\]
+	Значит, ни \(\lambda\), ни \(\overline{\lambda}\) не являются собственными значениями оператора \(A\).
+	Следовательно,
+	\[
+	\ker(A-\lambda I)=\{0\},
+	\]
+	и
+	\[
+	\ker(A-\overline{\lambda}I)=\{0\}.
+	\]
+	То есть
+	\[
+	\ker A_\lambda=\{0\},
+	\qquad
+	\ker A_\lambda^*=\{0\}.
+	\]
+	
+	Из разложения из 10.2 имеем
+	\[
+	H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda^*.
+	\]
+	Но \(\ker A_\lambda^*=\{0\}\), значит
+	\[
+	H=\overline{\operatorname{Im}A_\lambda}.
+	\]
+	Так как одновременно \(\ker A_\lambda=\{0\}\), можно записать
+	\[
+	H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda.
+	\]
+\end{proof}

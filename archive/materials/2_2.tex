@@ -1,0 +1,34 @@
+% --- Содержимое файла materials/2_2.tex ---
+\subsection{Теорема Банаха о сжимающих отображениях}
+\begin{theorem}[О сжимающем отображении (Принцип Банаха)]\label{banach-compact}
+	\textbf{Условия:}
+	\begin{itemize}
+		\item $X$ --- полное метрическое пространство;
+		\item $F: X \to X$ --- сжимающее отображение, т.е. существует такое $\lambda \in (0, 1)$, что для всех $x, y \in X$ выполнено:
+		\[ \rho(F(x), F(y)) \leqslant \lambda \rho(x, y) \]
+	\end{itemize}
+	\textbf{Следовательно:}
+	\begin{itemize}
+		\item У отображения $F$ существует единственная неподвижная точка $x^* \in X$, такая что $F(x^*) = x^*$.
+	\end{itemize}
+\end{theorem}
+ 
+\begin{proof}
+	\begin{enumerate}
+		\item \textbf{Построение последовательности (метод итераций):} Зафиксируем произвольное $x_0 \in X$ и определим последовательность итераций: $x_1 = F(x_0)$, $x_2 = F(x_1)$, ..., $x_{n+1} = F(x_n)$.
+		
+		\item \textbf{Оценка расстояния между соседними шагами:} Заметим, что по определению сжатия:
+		\[ \rho(x_{k+1}, x_k) = \rho(F(x_k), F(x_{k-1})) \leqslant \lambda \rho(x_k, x_{k-1}) \leqslant \dots \leqslant \lambda^k \rho(x_1, x_0) \]
+		
+		\item \textbf{Фундаментальность:} Оценим расстояние между $x_n$ и $x_{n+p}$, используя неравенство треугольника и сумму геометрической прогрессии:
+		\[ \rho(x_{n+p}, x_n) \leqslant \sum_{i=n}^{n+p-1} \rho(x_{i+1}, x_i) \leqslant \sum_{i=n}^{n+p-1} \lambda^i \rho(x_1, x_0) \leqslant \frac{\lambda^n}{1 - \lambda} \rho(x_1, x_0) \]
+		Так как $\lambda < 1$, при $n \to \infty$ величина $\lambda^n \to 0$, следовательно, последовательность $\{x_n\}$ фундаментальна.
+		
+		\item \textbf{Существование предела:} Поскольку $X$ полно, существует предел $x^* = \lim_{n \to \infty} x_n$. Переходя к пределу в равенстве $x_{n+1} = F(x_n)$ (учитывая, что любое сжатие автоматически непрерывно), получаем:
+		\[ \lim_{n \to \infty} x_{n+1} = F(\lim_{n \to \infty} x_n) \Rightarrow x^* = F(x^*) \]
+		
+		\item \textbf{Единственность:} Допустим, есть вторая точка $y^* = F(y^*)$. Тогда:
+		\[ \rho(x^*, y^*) = \rho(F(x^*), F(y^*)) \leqslant \lambda \rho(x^*, y^*) \]
+		Так как $\lambda < 1$, это неравенство возможно только при $\rho(x^*, y^*) = 0$, то есть $x^* = y^*$.
+	\end{enumerate}
+\end{proof}

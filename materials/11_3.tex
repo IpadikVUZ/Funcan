@@ -1,0 +1,363 @@
+\subsection{Критерий принадлежности числа спектру самосопряженного оператора. Вещественность спектра самосопряженного оператора}
+
+\begin{definition}[Оператор \(A_\lambda\)]
+	Пусть \(H\) --- гильбертово пространство над \(\mathbb{C}\),
+	\[
+	A\in\mathcal{L}(H),
+	\qquad
+	\lambda\in\mathbb{C}.
+	\]
+	Обозначим
+	\[
+	A_\lambda=A-\lambda I.
+	\]
+\end{definition}
+
+\begin{remark}[Используемые факты]
+	В доказательстве используем два уже доказанных факта.
+	
+	\begin{itemize}
+		\item Если оператор ограничен снизу, то он инъективен и его образ замкнут.
+		
+		\item Для самосопряженного оператора \(A\) выполнено разложение
+		\[
+		H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda.
+		\]
+	\end{itemize}
+\end{remark}
+
+\begin{theorem}[Критерий принадлежности числа спектру]
+	Пусть \(H\) --- гильбертово пространство над \(\mathbb{C}\), и
+	\[
+	A\in\mathcal{L}(H)
+	\]
+	--- самосопряженный оператор. Тогда:
+	
+	\begin{itemize}
+		\item \[
+		\lambda\in\rho(A)
+		\Longleftrightarrow
+		A_\lambda \text{ ограничен снизу},
+		\]
+		то есть
+		\[
+		\exists m>0
+		\quad
+		\forall x\in H
+		\qquad
+		\|A_\lambda x\|\geqslant m\|x\|.
+		\]
+		
+		\item \[
+		\lambda\in\sigma(A)
+		\Longleftrightarrow
+		\exists \{x_n\}\subset H:
+		\|x_n\|=1,
+		\quad
+		A_\lambda x_n\to0.
+		\]
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	Сначала докажем критерий через ограниченность снизу, а затем аккуратно перепишем его
+	отрицание.
+	
+	\textbf{1. Если \(\lambda\in\rho(A)\), то \(A_\lambda\) ограничен снизу.}
+	
+	Пусть
+	\[
+	\lambda\in\rho(A).
+	\]
+	Тогда по определению резольвентного множества существует ограниченный обратный оператор
+	\[
+	A_\lambda^{-1}\in\mathcal{L}(H).
+	\]
+	По критерию из билета 8.1 отсюда следует, что \(A_\lambda\) ограничен снизу.
+	
+	То есть существует \(m>0\), такое что
+	\[
+	\|A_\lambda x\|\geqslant m\|x\|
+	\qquad
+	\forall x\in H.
+	\]
+	
+	\textbf{2. Если \(A_\lambda\) ограничен снизу, то \(\lambda\in\rho(A)\).}
+	
+	Пусть существует \(m>0\), такое что
+	\[
+	\|A_\lambda x\|\geqslant m\|x\|
+	\qquad
+	\forall x\in H.
+	\]
+	Нужно доказать, что
+	\[
+	A_\lambda^{-1}\in\mathcal{L}(H).
+	\]
+	По билету 8.1 для этого достаточно показать, что
+	\[
+	\operatorname{Im}A_\lambda=H.
+	\]
+	
+	\begin{itemize}
+		\item \textbf{Ядро тривиально.}
+		
+		Если
+		\[
+		x\in\ker A_\lambda,
+		\]
+		то
+		\[
+		A_\lambda x=0.
+		\]
+		По ограниченности снизу
+		\[
+		0=\|A_\lambda x\|\geqslant m\|x\|.
+		\]
+		Так как \(m>0\), получаем
+		\[
+		x=0.
+		\]
+		Значит,
+		\[
+		\ker A_\lambda=\{0\}.
+		\]
+		
+		\item \textbf{Образ плотен.}
+		
+		По разложению из билета 11.2
+		\[
+		H=\overline{\operatorname{Im}A_\lambda}\oplus_{\perp}\ker A_\lambda.
+		\]
+		Так как
+		\[
+		\ker A_\lambda=\{0\},
+		\]
+		получаем
+		\[
+		H=\overline{\operatorname{Im}A_\lambda}.
+		\]
+		
+		\item \textbf{Образ замкнут.}
+		
+		Так как \(A_\lambda\) ограничен снизу, то по следствию из билета 8.1 его образ замкнут:
+		\[
+		\operatorname{Im}A_\lambda
+		\text{ замкнут}.
+		\]
+		Но уже известно, что
+		\[
+		\overline{\operatorname{Im}A_\lambda}=H.
+		\]
+		Следовательно,
+		\[
+		\operatorname{Im}A_\lambda=H.
+		\]
+	\end{itemize}
+	
+	Итак, \(A_\lambda\) инъективен и сюръективен на \(H\), а также ограничен снизу. Поэтому по
+	критерию из билета 8.1
+	\[
+	A_\lambda^{-1}\in\mathcal{L}(H).
+	\]
+	Значит,
+	\[
+	\lambda\in\rho(A).
+	\]
+	
+	\textbf{3. Перепишем отрицание критерия.}
+	
+	Из первого пункта имеем
+	\[
+	\lambda\in\sigma(A)
+	\Longleftrightarrow
+	\lambda\notin\rho(A)
+	\Longleftrightarrow
+	A_\lambda \text{ не ограничен снизу}.
+	\]
+	Отрицание ограниченности снизу имеет вид:
+	\[
+	\forall m>0
+	\quad
+	\exists x\in H
+	\qquad
+	\|A_\lambda x\|<m\|x\|.
+	\]
+	Такой \(x\) автоматически ненулевой, иначе получилось бы \(0<0\).
+	
+	Выберем
+	\[
+	m=\frac{1}{n}.
+	\]
+	Тогда существует \(u_n\neq0\), такое что
+	\[
+	\|A_\lambda u_n\|<\frac{1}{n}\|u_n\|.
+	\]
+	Положим
+	\[
+	x_n=\frac{u_n}{\|u_n\|}.
+	\]
+	Тогда
+	\[
+	\|x_n\|=1
+	\]
+	и
+	\[
+	\|A_\lambda x_n\|
+	=
+	\frac{\|A_\lambda u_n\|}{\|u_n\|}
+	<
+	\frac{1}{n}.
+	\]
+	Следовательно,
+	\[
+	A_\lambda x_n\to0.
+	\]
+	
+	Обратно, если существует последовательность \(\{x_n\}\), такая что
+	\[
+	\|x_n\|=1,
+	\qquad
+	A_\lambda x_n\to0,
+	\]
+	то \(A_\lambda\) не может быть ограничен снизу. Действительно, если бы существовало
+	\(m>0\), такое что
+	\[
+	\|A_\lambda x\|\geqslant m\|x\|
+	\qquad
+	\forall x\in H,
+	\]
+	то для \(x=x_n\) получили бы
+	\[
+	\|A_\lambda x_n\|\geqslant m,
+	\]
+	что противоречит сходимости
+	\[
+	A_\lambda x_n\to0.
+	\]
+	Значит,
+	\[
+	\lambda\in\sigma(A).
+	\]
+\end{proof}
+
+\begin{theorem}[Вещественность спектра самосопряженного оператора]
+	Пусть \(H\) --- гильбертово пространство над \(\mathbb{C}\), и
+	\[
+	A\in\mathcal{L}(H)
+	\]
+	--- самосопряженный оператор. Тогда
+	\[
+	\sigma(A)\subset\mathbb{R}.
+	\]
+\end{theorem}
+
+\begin{proof}
+	Докажем равносильное утверждение:
+	\[
+	\lambda\notin\mathbb{R}
+	\Longrightarrow
+	\lambda\in\rho(A).
+	\]
+	
+	\textbf{1. Представим \(\lambda\) и выделим самосопряженную часть.}
+	
+	Пусть
+	\[
+	\lambda=\mu+i\nu,
+	\qquad
+	\mu,\nu\in\mathbb{R},
+	\qquad
+	\nu\neq0.
+	\]
+	Тогда
+	\[
+	A_\lambda
+	=
+	A-\lambda I
+	=
+	A-\mu I-i\nu I.
+	\]
+	Обозначим
+	\[
+	A_\mu=A-\mu I.
+	\]
+	Так как \(A\) самосопряжен и \(\mu\in\mathbb{R}\), оператор \(A_\mu\) тоже самосопряжен.
+	
+	\textbf{2. Докажем оценку снизу для \(A_\lambda\).}
+	
+	Возьмём произвольный \(x\in H\). Тогда
+	\[
+	A_\lambda x
+	=
+	A_\mu x-i\nu x.
+	\]
+	Поэтому
+	\[
+	\|A_\lambda x\|^2
+	=
+	(A_\mu x-i\nu x,\ A_\mu x-i\nu x).
+	\]
+	Раскрывая скалярное произведение, получаем
+	\[
+	\|A_\lambda x\|^2
+	=
+	\|A_\mu x\|^2
+	-i\nu(x,A_\mu x)
+	+i\nu(A_\mu x,x)
+	+|\nu|^2\|x\|^2.
+	\]
+	Так как \(A_\mu\) самосопряжен, по билету 11.1
+	\[
+	(A_\mu x,x)\in\mathbb{R}.
+	\]
+	Значит,
+	\[
+	(x,A_\mu x)=(A_\mu x,x),
+	\]
+	и смешанные слагаемые сокращаются:
+	\[
+	-i\nu(x,A_\mu x)
+	+i\nu(A_\mu x,x)=0.
+	\]
+	Следовательно,
+	\[
+	\|A_\lambda x\|^2
+	=
+	\|A_\mu x\|^2
+	+
+	|\nu|^2\|x\|^2.
+	\]
+	Отсюда
+	\[
+	\|A_\lambda x\|^2
+	\geqslant
+	|\nu|^2\|x\|^2.
+	\]
+	Значит,
+	\[
+	\|A_\lambda x\|
+	\geqslant
+	|\nu|\|x\|.
+	\]
+	То есть \(A_\lambda\) ограничен снизу.
+	
+	\textbf{3. Применим критерий принадлежности спектру.}
+	
+	По доказанному критерию
+	\[
+	A_\lambda \text{ ограничен снизу}
+	\Longrightarrow
+	\lambda\in\rho(A).
+	\]
+	Следовательно,
+	\[
+	\lambda\notin\mathbb{R}
+	\Longrightarrow
+	\lambda\in\rho(A).
+	\]
+	То есть нерегулярных точек вне вещественной оси нет, поэтому
+	\[
+	\sigma(A)\subset\mathbb{R}.
+	\]
+\end{proof}

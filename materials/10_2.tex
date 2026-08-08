@@ -1,0 +1,174 @@
+\subsection{Сопряженные операторы в гильбертовом пространстве. Равенство \texorpdfstring{\(H=\overline{\operatorname{Im} A}\oplus\ker A^*\)}{H = cl Im A plus ker A*}}
+
+\begin{definition}[Сопряженный оператор в гильбертовом пространстве]
+	Пусть \(H_1,H_2\) --- гильбертовы пространства и
+	\[
+	A\in\mathcal{L}(H_1,H_2).
+	\]
+	Оператор
+	\[
+	A^*:H_2\to H_1
+	\]
+	называется \textbf{сопряженным} к \(A\), если
+	\[
+	(Ax,y)_{H_2}=(x,A^*y)_{H_1}
+	\qquad
+	\forall x\in H_1,\ \forall y\in H_2.
+	\]
+\end{definition}
+
+\begin{remark}[Философия Рисса--Фреше]
+	В линейных нормированных пространствах сопряженный оператор действует между
+	сопряженными пространствами:
+	\[
+	A':H_2^*\to H_1^*,
+	\qquad
+	A'g=g\circ A.
+	\]
+	В гильбертовом пространстве по теореме Рисса--Фреше функционал можно записывать
+	через скалярное произведение. Поэтому, если
+	\[
+	g(\xi)=(\xi,y)_{H_2},
+	\]
+	то
+	\[
+	(x,A^*y)_{H_1}
+	=
+	(A'g)(x)
+	=
+	g(Ax)
+	=
+	(Ax,y)_{H_2}.
+	\]
+	То есть гильбертово сопряжение является частным случаем обычного сопряжения после
+	отождествления \(H\) и \(H^*\).
+\end{remark}
+
+\begin{remark}[Свойства сопряженного оператора]
+	Сопряженный оператор в гильбертовом пространстве существует и единственен. Также
+	выполнены свойства:
+	\[
+	I^*=I,
+	\]
+	\[
+	(\alpha A+\beta B)^*
+	=
+	\overline{\alpha}A^*+\overline{\beta}B^*,
+	\]
+	\[
+	(AB)^*=B^*A^*.
+	\]
+	Они доказываются прямой проверкой из определения.
+\end{remark}
+
+\begin{theorem}[Разложение гильбертова пространства]
+	Пусть \(H\) --- гильбертово пространство над \(\mathbb{K}\), и
+	\[
+	A\in\mathcal{L}(H).
+	\]
+	Тогда
+	\[
+	H=\overline{\operatorname{Im}A}\oplus\ker A^*.
+	\]
+\end{theorem}
+
+\begin{proof}
+	Докажем разложение через ортогональное дополнение к образу.
+	
+	\textbf{1. Простая часть: докажем равенство \((\operatorname{Im}A)^\perp=\ker A^*\).}
+	
+	Пусть
+	\[
+	y\in(\operatorname{Im}A)^\perp.
+	\]
+	Это означает, что
+	\[
+	(Az,y)=0
+	\qquad
+	\forall z\in H.
+	\]
+	По определению сопряженного оператора
+	\[
+	(Az,y)=(z,A^*y).
+	\]
+	Значит,
+	\[
+	(z,A^*y)=0
+	\qquad
+	\forall z\in H.
+	\]
+	Отсюда
+	\[
+	A^*y=0.
+	\]
+	Следовательно,
+	\[
+	y\in\ker A^*.
+	\]
+	
+	Обратно, если
+	\[
+	y\in\ker A^*,
+	\]
+	то
+	\[
+	A^*y=0.
+	\]
+	Тогда для любого \(z\in H\)
+	\[
+	(Az,y)=(z,A^*y)=(z,0)=0.
+	\]
+	Значит,
+	\[
+	y\in(\operatorname{Im}A)^\perp.
+	\]
+	
+	Итак,
+	\[
+	(\operatorname{Im}A)^\perp=\ker A^*.
+	\]
+	
+	\textbf{2. Сложная часть: применим теорему о проекции.}
+	
+	Знаем, что для любого множества \(S\subset H\)
+	\[
+	S^\perp=\left(\overline{S}\right)^\perp.
+	\]
+	Поэтому
+	\[
+	(\operatorname{Im}A)^\perp
+	=
+	\left(\overline{\operatorname{Im}A}\right)^\perp.
+	\]
+	Так как
+	\[
+	\overline{\operatorname{Im}A}
+	\]
+	--- замкнутое подпространство в \(H\), то по теореме Рисса о проекции
+	\[
+	H
+	=
+	\overline{\operatorname{Im}A}
+	\oplus
+	\left(\overline{\operatorname{Im}A}\right)^\perp.
+	\]
+	Но
+	\[
+	\left(\overline{\operatorname{Im}A}\right)^\perp
+	=
+	(\operatorname{Im}A)^\perp
+	=
+	\ker A^*.
+	\]
+	Следовательно,
+	\[
+	H=\overline{\operatorname{Im}A}\oplus\ker A^*.
+	\]
+\end{proof}
+
+\begin{remark}
+	Аналогично, применяя доказанное равенство к оператору \(A^*\), получаем
+	\[
+	H=\overline{\operatorname{Im}A^*}\oplus\ker A.
+	\]
+\end{remark}

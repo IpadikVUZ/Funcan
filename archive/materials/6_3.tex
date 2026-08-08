@@ -1,0 +1,227 @@
+% --- Содержимое файла materials/6_3.tex ---
+
+\subsection{Пространства $D(\mathbb{R})$ и $D'(\mathbb{R})$. Действия над обобщёнными функциями; $\delta$-функция и $\delta$-образные последовательности. Уравнение $y' = 0$ в $D'(\mathbb{R})$.}
+
+\begin{idea}[Смысл пространства $D'$]
+	Обычные функции определяют значения в точках. Обобщенные функции определяют результат "взаимодействия" с гладким тестовым сигналом. 
+	Это позволяет дифференцировать разрывные функции и описывать точечные воздействия ($\delta$-функция), которые физически существуют, но математически не являются классическими функциями.
+\end{idea}
+
+\begin{definition}[Пространство пробных функций $D$]
+	Пространством \textbf{пробных (основных) функций} $D(\mathbb{R})$ называется пространство бесконечно дифференцируемых функций с компактным носителем $C_0^\infty(\mathbb{R})$.
+	\begin{itemize}
+		\item \textbf{Носитель} $\text{supp}(\varphi) = \overline{\{x \in \mathbb{R} \mid \varphi(x) \neq 0\}}$.
+		\item Функция \textbf{финитна}, если её носитель --- компакт (отрезок).
+	\end{itemize}
+\end{definition}
+
+\begin{example}[Функция-«шапочка»]
+	Типичный представитель $D(\mathbb{R})$ --- функция $\omega(x, a)$:
+	\[ \omega(x, a) = \begin{cases} \exp\left(-\frac{a^2}{a^2 - x^2}\right), & |x| < a \\ 0, & |x| \geqslant a \end{cases} \]
+\end{example}
+
+\begin{definition}[Сходимость в $D$]
+	Последовательность $\varphi_n \to \varphi$ в $D$, если:
+	\begin{enumerate}
+		\item $\exists K \subset \mathbb{R}$ (компакт), такой что $\text{supp}(\varphi_n) \subseteq K$ для всех $n$;
+		\item $\forall k \ge 0: \varphi_n^{(k)} \rightrightarrows \varphi^{(k)}$ (равномерная сходимость всех производных на $K$).
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Неметризуемость]
+	Топология в пространстве $D$ неметризуема.
+\end{proposition}
+\begin{proof}
+	Предположим противное: существует метрика. Рассмотрим $\varphi_n(x) = \frac{1}{n}\omega(x, n)$. 
+	Поточечно $\varphi_n \to 0$. В метрическом пространстве это порождало бы сходимость подпоследовательности к нулю. 
+	Однако у любой сходящейся в $D$ последовательности должен быть \textbf{общий компактный носитель}. Но носители $[-n, n]$ расширяются на всю прямую $\implies$ противоречие.
+\end{proof}
+
+\begin{definition}[Обобщенная функция]
+	\textbf{Обобщенными функциями} (распределениями) называются линейные непрерывные функционалы над пространством $D$.
+	\begin{itemize}
+		\item \textbf{Регулярные:} Порождаются $f(x) \in L_{1, loc}$ по правилу: $(f, \varphi) = \int_{-\infty}^{+\infty} f(x)\varphi(x) dx$.
+		\item \textbf{Сингулярные:} Функционалы, не представимые в виде такого интеграла.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Дельта-функция]
+	$\delta$-функция Дирака --- это сингулярный функционал: $(\delta, \varphi) = \varphi(0)$.
+\end{definition}
+
+\begin{proof}[Доказательство сингулярности $\delta$]
+	Возьмем $\omega(x, a)$. $(\delta, \omega) = e^{-1}$. 
+	Если $\delta$ регулярна ($f$), то по теореме Лебега при $a \to 0$ интеграл $\int f(x)\omega(x, a) dx \to 0$. 
+	Но $e^{-1} \neq 0 \implies$ противоречие.
+\end{proof}
+
+\begin{proposition}[Действия над обобщенными функциями]
+	Операции определяются через сопряжение:
+	\begin{enumerate}
+		\item \textbf{Умножение на $\psi \in C^\infty$:} $(\psi f, \varphi) = (f, \psi \varphi)$.
+		\item \textbf{Дифференцирование:} $(f', \varphi) = -(f, \varphi')$. 
+		\textit{Любая обобщенная функция бесконечно дифференцируема.}
+		\item \textbf{Свертка:} Свойство $f * \delta = f$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Уравнение $y' = 0$]
+	Решением уравнения $y' = 0$ в $D'(\mathbb{R})$ является только константа $y = C$.
+\end{theorem}
+
+\begin{proof}
+	Пусть
+	\[
+	y' = 0 \quad \text{в } D'(\mathbb{R}).
+	\]
+	По определению производной распределения это означает, что для любой $\varphi \in D(\mathbb{R})$
+	\[
+	(y',\varphi) = -(y,\varphi') = 0.
+	\]
+	Следовательно,
+	\[
+	(y,\varphi') = 0 \qquad \forall \varphi \in D(\mathbb{R}).
+	\]
+	Итак, распределение $y$ обращается в нуль на всех функциях, которые являются производными пробных функций.
+	
+	\medskip
+	\textbf{Шаг 1. Опишем множество всех производных функций из $D(\mathbb{R})$.}
+	
+	Обозначим
+	\[
+	K := \left\{\psi \in D(\mathbb{R}) \;\middle|\; \int_{-\infty}^{+\infty} \psi(x)\,dx = 0 \right\}.
+	\]
+	Покажем, что
+	\[
+	\{\varphi' \mid \varphi \in D(\mathbb{R})\} = K.
+	\]
+	
+	\smallskip
+	\textit{(i) Включение $\subseteq$.}
+	Если $\psi = \varphi'$ для некоторой $\varphi \in D(\mathbb{R})$, то
+	\[
+	\int_{-\infty}^{+\infty} \psi(x)\,dx
+	=
+	\int_{-\infty}^{+\infty} \varphi'(x)\,dx
+	=
+	\varphi(+\infty)-\varphi(-\infty)=0,
+	\]
+	поскольку $\varphi$ имеет компактный носитель. Значит, $\psi \in K$.
+	
+	\smallskip
+	\textit{(ii) Включение $\supseteq$.}
+	Пусть теперь $\psi \in K$, то есть $\psi \in D(\mathbb{R})$ и
+	\[
+	\int_{-\infty}^{+\infty} \psi(x)\,dx = 0.
+	\]
+	Определим функцию
+	\[
+	\varphi(x) := \int_{-\infty}^{x} \psi(t)\,dt.
+	\]
+	Тогда $\varphi \in C^\infty(\mathbb{R})$ и
+	\[
+	\varphi'(x)=\psi(x).
+	\]
+	Осталось проверить, что $\varphi$ имеет компактный носитель.
+	
+	Так как $\psi$ финитна, существует отрезок $[a,b]$, вне которого $\psi=0$.
+	Тогда:
+	\begin{itemize}
+		\item при $x<a$ имеем $\varphi(x)=0$, так как интеграл берётся по области, где $\psi=0$;
+		\item при $x>b$ имеем
+		\[
+		\varphi(x)=\int_{-\infty}^{x}\psi(t)\,dt
+		=
+		\int_{-\infty}^{+\infty}\psi(t)\,dt
+		=
+		0.
+		\]
+	\end{itemize}
+	Значит, $\varphi(x)=0$ вне $[a,b]$, то есть $\varphi \in D(\mathbb{R})$.
+	
+	Итак, действительно
+	\[
+	\{\varphi' \mid \varphi \in D(\mathbb{R})\}=K.
+	\]
+	
+	\medskip
+	\textbf{Шаг 2. Условие $y'=0$ означает, что $y$ зануляется на $K$.}
+	
+	Из предыдущего шага и равенства
+	\[
+	(y,\varphi')=0 \qquad \forall \varphi \in D(\mathbb{R})
+	\]
+	получаем:
+	\[
+	(y,\psi)=0 \qquad \forall \psi \in K.
+	\]
+	
+	\medskip
+	\textbf{Шаг 3. Разложим произвольную пробную функцию на сумму элемента из $K$ и фиксированной функции с интегралом $1$.}
+	
+	Выберем функцию $\eta \in D(\mathbb{R})$ такую, что
+	\[
+	\int_{-\infty}^{+\infty}\eta(x)\,dx = 1.
+	\]
+	(Например, можно взять подходящую нормированную ``шапочку''.)
+	
+	Для любой $\varphi \in D(\mathbb{R})$ положим
+	\[
+	\psi := \varphi - \left(\int_{-\infty}^{+\infty}\varphi(x)\,dx\right)\eta.
+	\]
+	Тогда
+	\[
+	\int_{-\infty}^{+\infty}\psi(x)\,dx
+	=
+	\int \varphi(x)\,dx
+	-
+	\left(\int \varphi(x)\,dx\right)\int \eta(x)\,dx
+	=
+	0.
+	\]
+	Следовательно, $\psi \in K$, и потому
+	\[
+	\varphi
+	=
+	\psi + \left(\int_{-\infty}^{+\infty}\varphi(x)\,dx\right)\eta.
+	\]
+	
+	\medskip
+	\textbf{Шаг 4. Вычислим действие $y$ на произвольной функции.}
+	
+	Так как $\psi \in K$, то $(y,\psi)=0$. Поэтому
+	\[
+	(y,\varphi)
+	=
+	(y,\psi)
+	+
+	\left(\int_{-\infty}^{+\infty}\varphi(x)\,dx\right)(y,\eta)
+	=
+	\left(\int_{-\infty}^{+\infty}\varphi(x)\,dx\right)(y,\eta).
+	\]
+	Обозначим
+	\[
+	C := (y,\eta).
+	\]
+	Тогда для любой $\varphi \in D(\mathbb{R})$
+	\[
+	(y,\varphi)
+	=
+	C \int_{-\infty}^{+\infty}\varphi(x)\,dx.
+	\]
+	
+	Но правая часть есть действие регулярного распределения, порождённого постоянной функцией $C$, поскольку
+	\[
+	(C,\varphi)=\int_{-\infty}^{+\infty} C\,\varphi(x)\,dx
+	=
+	C \int_{-\infty}^{+\infty}\varphi(x)\,dx.
+	\]
+	Следовательно,
+	\[
+	y=C.
+	\]
+	
+	Таким образом, все решения уравнения $y'=0$ в $D'(\mathbb{R})$ и только они --- постоянные распределения.
+\end{proof}
+
+

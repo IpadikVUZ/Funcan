@@ -1,0 +1,60 @@
+\subsection{Арцела-Асколи}
+
+% --- Содержимое файла materials/3_3.tex ---
+
+\begin{definition}[Пространство непрерывных функций]
+	Обозначим за $C(X, Y)$ множество непрерывных функций $f: X \to Y$.
+\end{definition}
+
+\begin{theorem}[Арцела---Асколи]\label{arzela-ascoli}
+	\textbf{Условия:}
+	\begin{itemize}
+		\item $X$ --- компактное метрическое пространство;
+		\item $M \subset C(X, \mathbb{R})$.
+	\end{itemize}
+	\textbf{Следовательно:}
+	\begin{itemize}
+		\item Множество $M$ вполне ограниченно $\Leftrightarrow$ множество $M$ ограничено и выполнено условие \textbf{равностепенной непрерывности}:
+		\[
+		\forall \varepsilon > 0: \exists \delta > 0: \forall x, y \in X, \rho(x, y) < \delta: \forall f \in M: |f(x) - f(y)| < \varepsilon 
+		\]
+	\end{itemize}
+\end{theorem}
+
+\begin{idea}
+	\textbf{Суть:} Для компактности в пространстве функций обычной ограниченности (все функции лежат в «трубе») мало. Нужно, чтобы функции не «осциллировали» слишком быстро — то есть для всех функций из набора должен существовать единый $\delta$, обеспечивающий малый шаг по значению.
+\end{idea}
+
+\begin{proof}[Доказательство для случая $X = [a, b]$]
+	\begin{itemize}
+		\item[$\Rightarrow$] \textbf{Необходимость.}
+		\begin{enumerate}
+			\item Ограниченность $M$ следует из существования конечной $\varepsilon$-сети (любое вполне ограниченное множество ограничено).
+			\item Проверим равностепенную непрерывность. Зафиксируем $\varepsilon > 0$ и выберем конечную $\varepsilon$-сеть $\{\varphi_1, \dotsc, \varphi_n\} \subset C(X, \mathbb{R})$.
+			\item Каждая $\varphi_k$ равномерно непрерывна (по теореме Кантора \ref{thm3.3}). Выберем $\delta_k > 0$ такие, что:
+			\[ \rho(x, y) < \delta_k \Rightarrow |\varphi_k(x) - \varphi_k(y)| < \varepsilon. \]
+			\item Положим $\delta := \min \{\delta_1, \dotsc, \delta_n\}$. Тогда для любой $f \in M$ выберем ближайшую $\varphi_k$ из сети и получим:
+			\[ |f(x)-f(y)| \leqslant |f(x) - \varphi_k (x)| + |\varphi_k (x) - \varphi_k (y)| + |\varphi_k (y) - f (y)| < \varepsilon + \varepsilon + \varepsilon = 3\varepsilon. \]
+		\end{enumerate}
+		
+		\item[$\Leftarrow$] \textbf{Достаточность.}
+		\begin{enumerate}
+			\item \textbf{Сетка значений:} Так как $M$ ограничено, $\exists C > 0 : \forall f \in M \Rightarrow \|f\| \leqslant C$. Зафиксируем $\varepsilon > 0$. По равностепенной непрерывности выберем $\delta > 0$.
+			\item \textbf{Разбиение:} Разобьем $[a, b]$ точками $x_i$ на отрезки $< \delta$, а $[-C, C]$ точками $y_j$ на отрезки $< \varepsilon$. 
+			\item \textbf{Построение сети:} Рассмотрим конечное множество $L$ кусочно-линейных функций (ломаных), проходящих через узлы $(x_i, y_j)$.
+			
+			
+			
+			\item \textbf{Аппроксимация:} Для любой $f \in M$ выберем ломаную $\varphi \in L$ такую, что в узлах $|f(x_i) - \varphi(x_i)| < \varepsilon$.
+			\item \textbf{Оценка:} Пусть $x \in [x_i, x_{i+1}]$. Тогда:
+			\[ |f(x) - \varphi(x)| \leqslant |f(x) - f(x_i)| + |f(x_i) - \varphi(x_i)| + |\varphi(x_i) - \varphi(x)| < 2\varepsilon + |\varphi(x_i) - \varphi(x_{i+1})|. \]
+			Оценим шаг ломаной через значения $f$:
+			\[ |\varphi(x_i) - \varphi(x_{i+1})| \leqslant |\varphi(x_i) - f(x_i)| + |f(x_i) - f(x_{i+1})| + |f(x_{i+1}) - \varphi(x_{i+1})| < 3\varepsilon. \]
+			\item \textbf{Итог:} Таким образом, $\|f - \varphi\| < 5\varepsilon$. Множество $L$ конечно и образует $5\varepsilon$-сеть. Значит, $M$ вполне ограничено.
+		\end{enumerate}
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	Данная теорема является ключевым инструментом для доказательства существования решений дифференциальных уравнений (теорема Пеано).
+\end{remark}

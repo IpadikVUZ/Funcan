@@ -1,0 +1,174 @@
+% --- Содержимое файла materials/1_1.tex ---
+
+\subsection{Метрические и топологические пространства. Примеры: $l_p, C_p[a, b] (p \geqslant 1), C^n[a, b]$. Неравенства Гёльдера и Минковского}
+
+\begin{definition}[Метрическое пространство]
+	Метрическим пространством называется множество $X$ с метрикой $\rho: X^2 \to \mathbb{R}$, обладающей следующими свойствами:
+	\begin{enumerate}
+		\item $\forall x, y \in X : \rho(x, y) \geqslant 0$, причем $\rho(x, y) = 0 \Leftrightarrow x = y$
+		\item $\forall x, y \in X : \rho(x, y) = \rho(y, x)$
+		\item $\forall x, y, z \in X : \rho(x, z) \leqslant \rho(x, y) + \rho(y, z)$ (неравенство треугольника)
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Топологическое пространство]
+	Топологическим пространством называется множество $X$ с системой $\tau \subset 2^X$, обладающей следующими свойствами:
+	\begin{enumerate}
+		\item $\varnothing, X \in \tau$
+		\item $\forall i \in \{1, 2, \dots, n\}, G_i \in \tau$ верно $\bigcap_{i=1}^n G_i \in \tau$
+		\item $\forall A$ — индексирующего множества, $G_{\alpha} \in \tau, \forall \alpha \in A$ верно $\bigcup_{\alpha \in A} G_{\alpha} \in \tau$
+	\end{enumerate}
+	Система $\tau$ называется \textbf{топологией} на множестве $X$, а элементы системы $\tau$ — \textbf{открытыми множествами}.
+\end{definition}
+
+\begin{theorem}[Неравенства Гёльдера и Минковского]
+	Пусть $E$ — измеримое. Пусть $f, g : E \to [0, +\infty]$ измеримы, и $1 < p < \infty, \frac{1}{p} + \frac{1}{q} = 1$. Тогда справедливо \textbf{неравенство Гёльдера}
+	\[ \int_E fg d\mu \leqslant \left( \int_E f^p d\mu \right)^{\frac{1}{p}} \cdot \left( \int_E g^q d\mu \right)^{\frac{1}{q}} \]
+	и \textbf{неравенство Минковского}
+	\[ \left( \int_E (f + g)^p d\mu \right)^{\frac{1}{p}} \leqslant \left( \int_E f^p d\mu \right)^{\frac{1}{p}} + \left( \int_E g^q d\mu \right)^{\frac{1}{p}} \]
+\end{theorem}
+
+\begin{remark}
+	Таблица метрических пространств и их свойства.
+\end{remark}
+
+\begin{definition}[Подпространство]
+	Пусть $X$ — МП, $Y \subset X$. \textbf{Подпространством} пространства $X$ называется метрическое пространство $Y$ с метрикой, являющейся сужением метрики на $X$.
+\end{definition}
+
+\begin{definition}[Ограниченность]
+	Пусть $X$ — МП. Множество $Y \subset X$ называется \textbf{ограниченным}, если выполнено условие $\sup_{x,y \in Y} \rho(x, y) < +\infty$.
+\end{definition}
+
+\begin{remark}
+	Далее в этом разделе мы стремимся показать, что каждое МП является ТП с топологией определенного вида, заданной метрикой пространства.
+\end{remark}
+
+\begin{definition}[Шары]
+	Пусть $X$ — МП, $x \in X, r > 0$.
+	\begin{itemize}
+		\item \textbf{Открытым шаром} называется множество $B(x, r) := \{y \in X : \rho(y, x) < r\}$
+		\item \textbf{Замкнутым шаром} называется множество $\overline{B}(x, r) := \{y \in X : \rho(y, x) \leqslant r\}$
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Также достаточно часто используются альтернативные обозначения шаров: $B_r(x) := B(x, r)$ и $\overline{B}_r(x) := \overline{B}(x, r)$.
+\end{remark}
+
+\begin{definition}[Внутренность]
+	Пусть $X$ — МП, $M \subset X$. Точка $x \in X$ называется \textbf{внутренней точкой} множества $M$, если существует $r > 0$ такое, что $B(x, r) \subset M$. \textbf{Внутренностью} множества $M$ называется множество $\text{int } M$ всех его внутренних точек. Множество $M$ называется \textbf{открытым}, если $\text{int } M = M$.
+\end{definition}
+
+\begin{definition}[Замыкание]
+	Пусть $(X, \rho)$ — МП, $M \subset X$. Точка $x \in X$ называется \textbf{точкой прикосновения} множества $M$, если для любого $r > 0$ выполнено условие $B(x, r) \cap M \neq \varnothing$. \textbf{Замыканием} множества $M$ называется множество $\overline{M}$ всех его точек прикосновения. Множество $M$ называется \textbf{замкнутым}, если $\overline{M} = M$.
+\end{definition}
+
+\begin{theorem}
+	Пусть $X$ — МП, $M \subset X$. Тогда множество $M$ открыто $\Leftrightarrow$ множество $X \setminus M$ замкнуто.
+\end{theorem}
+
+\begin{theorem}[Двойственность замкнутых и открыхы]
+	Пусть $X$ — МП. Тогда:
+	\begin{enumerate}
+		\item Для любой системы открытых множеств $\{G_\alpha\}_{\alpha \in A} \subset 2^X$ множество $\bigcup_{\alpha \in A} G_\alpha$ тоже является открытым
+		\item Для любых открытых множеств $G_1, G_2 \subset X$ множество $G_1 \cap G_2$ тоже является открытым
+		\item Для любой системы замкнутых множеств $\{F_\alpha\}_{\alpha \in A} \subset 2^X$ множество $\bigcap_{\alpha \in A} F_\alpha$ тоже является замкнутым
+		\item Для любых замкнутых множеств $F_1, F_2 \subset X$ множество $F_1 \cup F_2$ тоже является замкнутым
+	\end{enumerate}
+
+\end{theorem}
+
+\begin{theorem}
+	Пусть $X$ — МП. Тогда:
+	\begin{enumerate}
+		\item Для любого $x \in X$ и $r > 0$ множество $B(x, r)$ — открытое
+		\item Для любого $x \in X$ и $r > 0$ множество $\overline{B}(x, r)$ — замкнутое
+		\item Для любого множества $M \subset X$ множество $\text{int } M$ — открытое, причем наибольшее по включению открытое множество, содержащееся в $M$
+		\item Для любого множества $M \subset X$ множество $\overline{M}$ — замкнутое, причем наименьшее по включению замкнутое множество, содержащее $M$
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Плотность]
+	Пусть $X$ — МП. Множество $A \subset X$ называется:
+	\begin{itemize}
+		\item \textbf{Плотным} в множестве $B \subset X$, если $B \subset \overline{A}$
+		\item \textbf{Всюду плотным}, если $X = \overline{A}$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[Всюду плотное множество]
+	Пусть $(X, \rho)$ "--- метрическое пространство. Подмножество $S \subset X$ называется \textbf{всюду плотным} в $X$, если любой элемент пространства $X$ можно сколь угодно точно приблизить элементами из $S$.
+	
+	Формально: для любой точки $x \in X$ и любой погрешности $\varepsilon > 0$ найдется элемент $s \in S$, лежащий на расстоянии меньше $\varepsilon$ от $x$:
+	\[ \forall x \in X, \; \forall \varepsilon > 0 \quad \exists s \in S : \rho(x, s) < \varepsilon \]
+\end{definition}
+
+\begin{definition}[Сепарабельность]
+	МП $X$ называется \textbf{сепарабельным}, если в $X$ существует не более чем счетное всюду плотное множество.
+\end{definition}
+
+\begin{definition}[Сходимость]
+	Пусть $X$ — МП. Последовательность $\{x_n\} \subset X$ \textbf{сходится} к точке $x \in X$, если $\rho(x_n, x) \to 0$ при $n \to \infty$. Обозначение — $x_n \xrightarrow[X]{} x$.
+\end{definition}
+
+\begin{definition}[Непрерывность в МП]
+	Пусть $X, Y$ — МП, $f: X \to Y$. Отображение $f$ называется \textbf{непрерывным в точке} $x \in X$, если выполнено одно из следующих условий:
+	\begin{enumerate}
+		\item Для любого $\varepsilon > 0$ существует $\delta > 0$ такое, что $f(B(x, \delta)) \subset B(f(x), \varepsilon)$
+		\item Для любой $\{x_n\} \subset X$ такой, что $x_n \to x$, выполнено $f(x_n) \to f(x)$
+	\end{enumerate}
+	Отображение $f$ называется \textbf{непрерывным}, если оно непрерывно во всех точках из $X$.
+\end{definition}
+
+\begin{remark}
+	Для ТП непрерывность определяется похожим образом и согласуется с непрерывностью в МП. Пусть $X, Y$ — ТП, $f: X \to Y$. Отображение $f$ называется \textbf{непрерывным в точке} $x \in X$, если выполнено:
+	\[ \forall V(f(x)) \in \tau_Y \exists U(x) \in \tau_X : f(U(x)) \subset V(f(x)). \]
+\end{remark}
+
+\begin{remark}
+	Можно заметить, что если прообраз любого открытого множества будет открыт, то и прообраз любого замкнутого будет замкнут.
+\end{remark}
+
+\begin{definition}[Гомеоморфизм]
+	Если отображение между МП $f: X \to Y$ взаимнооднозначно и взаимнонепрерывно, то есть $f^{-1}$ и $f$ непрерывны, то $f$ — \textbf{гомеоморфизм}. Пространства $X$ и $Y$ называются гомеоморфными.
+\end{definition}
+
+\begin{remark}
+	В случае топологических пространств, гомеоморфизм это биекция между $X$ и $Y$, а также между топологиями на них.
+\end{remark}
+
+\begin{definition}[Изометрия]
+	Если гомеоморфизм $f$ сохраняет расстояния:
+	\[ \rho(x_1, x_2) = \rho'(f(x_1), f(x_2)), \]
+	то он называется \textbf{изометрией}. Пространства $X$ и $Y$ называются изометричными.
+\end{definition}
+
+\begin{example}[Пространство $l_p$, $p \geqslant 1$]
+	Это пространство числовых последовательностей $x = (x_1, x_2, \dots)$, для которых сходится ряд из модулей в степени $p$:
+	\[ l_p = \left\{ x = (x_k)_{k=1}^\infty \mathrel{\bigg|} \sum_{k=1}^\infty |x_k|^p < \infty \right\} \]
+	Метрика задается формулой:
+	\[ \rho(x, y) = \left( \sum_{k=1}^\infty |x_k - y_k|^p \right)^{1/p} \]
+	\textbf{Почему это метрика?} Аксиома треугольника для этой метрики называется \textit{неравенством Минковского для сумм}:
+	\[ \left( \sum |x_k + y_k|^p \right)^{1/p} \leqslant \left( \sum |x_k|^p \right)^{1/p} + \left( \sum |y_k|^p \right)^{1/p} \]
+\end{example}
+
+\begin{example}[Пространство $C_p{[a, b]}$, $p \geqslant 1$]
+	Множество элементов — это \textbf{непрерывные} функции на отрезке $[a, b]$ (то же множество, что и в $C[a, b]$).
+	Однако метрика задается не через максимум, а через интеграл:
+	\[ \rho(f, g) = \left( \int_a^b |f(t) - g(t)|^p \, dt \right)^{1/p} \]
+	\textbf{Нюанс:} В этой метрике последовательность функций может сходиться, даже если она не сходится равномерно (пики могут становиться очень узкими, но высокими, главное чтобы площадь стремилась к нулю).
+	\\
+	Аксиома треугольника здесь обеспечивается \textit{неравенством Минковского для интегралов}.
+\end{example}
+
+
+
+\begin{example}[Пространство $C^n{[a, b]}$]
+	Это пространство функций, имеющих на отрезке $[a, b]$ непрерывные производные до порядка $n$ включительно.
+	Метрика учитывает близость не только самих функций, но и всех их производных:
+	\[ \rho(f, g) = \sum_{k=0}^n \max_{t \in [a, b]} |f^{(k)}(t) - g^{(k)}(t)| \]
+	Или эквивалентная ей:
+	\[ \rho(f, g) = \max_{k \in \{0, \dots, n\}} \left( \max_{t \in [a, b]} |f^{(k)}(t) - g^{(k)}(t)| \right) \]
+	Сходимость в этом пространстве означает равномерную сходимость самих функций и всех их производных до $n$-го порядка.
+\end{example}
