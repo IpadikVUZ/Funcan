@@ -70,100 +70,93 @@
 	\]
 \end{definition}
 
-\begin{proposition}[Резольвента вне круга радиуса \(\|A\|\)]
-	Если
+\begin{theorem}[Основные свойства резольвенты и спектра]
+	Пусть \(E\) --- комплексное банахово пространство,
 	\[
-	|\lambda|>\|A\|,
+	A\in\mathcal{L}(E).
 	\]
-	то
-	\[
-	\lambda\in\rho(A),
-	\]
-	причём
-	\[
-	R_\lambda
-	=
-	-\frac{1}{\lambda}
-	\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
-	\]
-\end{proposition}
-
-
-\begin{corollary}
-	Спектр оператора \(A\) лежит в замкнутом круге:
-	\[
-	\sigma(A)\subset\{\lambda\in\mathbb{C}:|\lambda|\leqslant \|A\|\}.
-	\]
-\end{corollary}
-
-\begin{theorem}[Аналитичность резольвенты]
-	Резольвентное множество \(\rho(A)\) открыто, а функция
-	\[
-	R_\lambda=(A-\lambda I)^{-1}
-	\]
-	аналитична на \(\rho(A)\). Более того,
-	\[
-	R'_\lambda=R_\lambda^2.
-	\]
+	Тогда выполнены следующие свойства.
+	
+	\begin{enumerate}
+		\item \textbf{Резольвента вне круга радиуса \(\|A\|\).}
+		
+		Если
+		\[
+		|\lambda|>\|A\|,
+		\]
+		то
+		\[
+		\lambda\in\rho(A),
+		\]
+		причём
+		\[
+		R_\lambda
+		=
+		(A-\lambda I)^{-1}
+		=
+		-\frac{1}{\lambda}
+		\sum_{n=0}^{\infty}\frac{A^n}{\lambda^n}.
+		\]
+		
+		Следовательно,
+		\[
+		\sigma(A)
+		\subset
+		\{\lambda\in\mathbb{C}:|\lambda|\leqslant\|A\|\}.
+		\]
+		
+		\item \textbf{Открытость резольвентного множества.}
+		
+		Множество
+		\[
+		\rho(A)
+		\]
+		открыто в \(\mathbb{C}\).
+		
+		\item \textbf{Аналитичность резольвенты.}
+		
+		Функция
+		\[
+		R_\lambda=(A-\lambda I)^{-1}
+		\]
+		аналитична на \(\rho(A)\), причём
+		\[
+		R'_\lambda=R_\lambda^2,
+		\qquad
+		\lambda\in\rho(A).
+		\]
+	\end{enumerate}
 \end{theorem}
 
-\begin{remark}[Равенство Гильберта для резольвенты]
-	Если
+\begin{definition}[Спектральный радиус]
+	Спектральным радиусом оператора \(A\) называется число
 	\[
-	\lambda,\mu\in\rho(A),
-	\]
-	то
-	\[
-	R_\lambda-R_\mu
+	r(A)
 	=
-	(\lambda-\mu)R_\lambda R_\mu.
+	\sup_{\lambda\in\sigma(A)}|\lambda|.
 	\]
-	
-	Действительно,
-	\[
-	R_\lambda-R_\mu
-	=
-	R_\lambda R_\mu^{-1}R_\mu
-	-
-	R_\lambda R_\lambda^{-1}R_\mu
-	=
-	R_\lambda(R_\mu^{-1}-R_\lambda^{-1})R_\mu.
-	\]
-	Но
-	\[
-	R_\mu^{-1}=A-\mu I,
-	\qquad
-	R_\lambda^{-1}=A-\lambda I.
-	\]
-	Значит,
-	\[
-	R_\mu^{-1}-R_\lambda^{-1}
-	=
-	(A-\mu I)-(A-\lambda I)
-	=
-	(\lambda-\mu)I.
-	\]
-	Следовательно,
-	\[
-	R_\lambda-R_\mu
-	=
-	(\lambda-\mu)R_\lambda R_\mu.
-	\]
-\end{remark}
+\end{definition}
 
 \begin{theorem}[Основная теорема о спектре]
-	Пусть \(E\) --- комплексное банахово пространство и
+	Пусть \(E\) --- комплексное банахово пространство,
 	\[
 	A\in\mathcal{L}(E).
 	\]
 	Тогда:
-	\begin{itemize}
-		\item спектр \(\sigma(A)\) --- непустой компакт;
+	
+	\begin{enumerate}
+		\item спектр
+		\[
+		\sigma(A)
+		\]
+		является непустым компактным подмножеством \(\mathbb{C}\);
+		
 		\item спектральный радиус задаётся формулой
 		\[
 		r(A)
 		=
-		\lim_{n\to\infty}\sqrt[n]{\|A^n\|}.
+		\lim_{n\to\infty}
+		\sqrt[n]{\|A^n\|}.
 		\]
-	\end{itemize}
+	\end{enumerate}
 \end{theorem}

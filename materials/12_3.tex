@@ -1,11 +1,11 @@
 \subsection{Теорема Фредгольма для компактных самосопряженных операторов}
 
 \begin{definition}[Оператор \(A_\lambda\)]
-	Пусть \(H\) --- комплексное гильбертово пространство,
+	Пусть
 	\[
-	A\in\mathcal{L}(H),
+	A\in\mathcal L(H),
 	\qquad
-	\lambda\in\mathbb{C}.
+	\lambda\in\mathbb C.
 	\]
 	Обозначим
 	\[
@@ -14,275 +14,124 @@
 \end{definition}
 
 \begin{lemma}
-	Пусть \(H\) --- комплексное гильбертово пространство,
+	Пусть
 	\[
-	A\in\mathcal{K}(H)
+	A\in\mathcal K(H)
 	\]
-	--- компактный самосопряженный оператор, и
+	--- самосопряженный оператор и
 	\[
 	\lambda\neq0.
 	\]
-	Если
+	Тогда на подпространстве
 	\[
-	\lambda\in\sigma(A),
+	M=(\ker A_\lambda)^\perp
 	\]
-	то \(\lambda\) является собственным значением оператора \(A\).
+	оператор \(A_\lambda\) ограничен снизу:
+	\[
+	\exists c>0
+	\qquad
+	\|A_\lambda x\|\geq c\|x\|,
+	\qquad x\in M.
+	\]
 \end{lemma}
 
 \begin{proof}
-	По критерию принадлежности числа спектру существует последовательность \(\{x_n\}\subset H\),
-	такая что
+	\textbf{Хотим получить противоречие с компактностью \(A\).}
+	
+	Предположим, что \(A_\lambda\) не ограничен снизу на \(M\).
+	Тогда существуют
 	\[
-	\|x_n\|=1
+	x_n\in M,
 	\qquad
-	\forall n
+	\|x_n\|=1,
 	\]
-	и
+	такие что
 	\[
 	A_\lambda x_n\to0.
 	\]
-	То есть
-	\[
-	Ax_n-\lambda x_n\to0.
-	\]
 	
-	Так как \(A\) компактен, последовательность \(\{Ax_n\}\) имеет сходящуюся подпоследовательность:
+	Так как \(A\) компактен, из ограниченной последовательности \(\{x_n\}\)
+	можно выбрать подпоследовательность, для которой
 	\[
 	Ax_{n_k}\to y.
 	\]
-	Из условия
-	\[
-	Ax_{n_k}-\lambda x_{n_k}\to0
-	\]
-	получаем
-	\[
-	\lambda x_{n_k}\to y.
-	\]
-	Так как \(\lambda\neq0\), то
-	\[
-	x_{n_k}\to \frac{1}{\lambda}y.
-	\]
-	Обозначим
-	\[
-	x=\frac{1}{\lambda}y.
-	\]
-	Тогда \(\|x\|=1\), поэтому \(x\neq0\).
 	
-	Переходя к пределу в равенстве
+	Но
 	\[
-	Ax_{n_k}-\lambda x_{n_k}\to0,
-	\]
-	получаем
-	\[
-	Ax-\lambda x=0.
-	\]
-	Значит,
-	\[
-	Ax=\lambda x,
-	\]
-	где \(x\neq0\). Следовательно, \(\lambda\) --- собственное значение оператора \(A\).
-\end{proof}
-
-\begin{lemma}
-	Пусть \(A\) --- самосопряженный оператор в \(H\), а \(M\subset H\) --- подпространство,
-	инвариантное относительно \(A\):
-	\[
-	A(M)\subset M.
-	\]
-	Тогда \(M^\perp\) тоже инвариантно относительно \(A\):
-	\[
-	A(M^\perp)\subset M^\perp.
-	\]
-\end{lemma}
-
-\begin{proof}
-	Пусть
-	\[
-	y\in M^\perp.
-	\]
-	Возьмём произвольный
-	\[
-	x\in M.
-	\]
-	Так как \(M\) инвариантно относительно \(A\), имеем
-	\[
-	Ax\in M.
-	\]
-	Поэтому
-	\[
-	(Ax,y)=0.
-	\]
-	Так как \(A\) самосопряжен,
-	\[
-	(x,Ay)=(Ax,y)=0.
-	\]
-	Это верно для любого \(x\in M\). Значит,
-	\[
-	Ay\in M^\perp.
-	\]
-	Следовательно,
-	\[
-	M^\perp
-	\]
-	инвариантно относительно \(A\).
-\end{proof}
-
-\begin{lemma}
-	Пусть \(H\) --- комплексное гильбертово пространство,
-	\[
-	A\in\mathcal{K}(H)
-	\]
-	--- компактный самосопряженный оператор, и
-	\[
-	\lambda\neq0.
-	\]
-	Тогда
-	\[
-	\operatorname{Im}A_\lambda
-	\]
-	замкнут, то есть
-	\[
-	\overline{\operatorname{Im}A_\lambda}
+	\lambda x_{n_k}
 	=
-	\operatorname{Im}A_\lambda.
+	Ax_{n_k}-A_\lambda x_{n_k}
+	\to y.
 	\]
-\end{lemma}
-
-\begin{proof}
-	Докажем, что замыкание образа на самом деле совпадает с образом.
-	
-	\textbf{1. Выделим нужное инвариантное подпространство.}
-	
-	По разложению из билета 11.2 имеем
+	Так как \(\lambda\neq0\),
 	\[
-	H=
-	\overline{\operatorname{Im}A_\lambda}
-	\oplus_{\perp}
-	\ker A_\lambda.
-	\]
-	Значит,
-	\[
-	\overline{\operatorname{Im}A_\lambda}
-	=
-	(\ker A_\lambda)^\perp.
+	x_{n_k}\to x:=\frac{y}{\lambda}.
 	\]
 	
-	Обозначим
-	\[
-	M=\ker A_\lambda.
-	\]
-	Тогда
-	\[
-	\overline{\operatorname{Im}A_\lambda}=M^\perp.
-	\]
-	
-	Подпространство \(M\) инвариантно относительно \(A\). Действительно, если
+	Подпространство \(M\) замкнуто, поэтому
 	\[
 	x\in M,
+	\qquad
+	\|x\|=1.
 	\]
-	то
-	\[
-	Ax=\lambda x,
-	\]
-	поэтому
-	\[
-	Ax\in M.
-	\]
-	По предыдущей лемме \(M^\perp\) тоже инвариантно относительно \(A\).
 	
-	\textbf{2. Ограничим оператор на \(M^\perp\).}
-	
-	Рассмотрим сужение
+	Переходя к пределу в
 	\[
-	\widehat A=A|_{M^\perp}:M^\perp\to M^\perp.
-	\]
-	Оператор \(\widehat A\) компактен и самосопряжен.
-	
-	Покажем, что \(\lambda\) не является собственным значением \(\widehat A\). Если бы существовал
-	ненулевой \(x\in M^\perp\), такой что
-	\[
-	\widehat A x=\lambda x,
-	\]
-	то
-	\[
-	Ax=\lambda x.
-	\]
-	Значит,
-	\[
-	x\in\ker A_\lambda=M.
-	\]
-	Но одновременно
-	\[
-	x\in M^\perp.
-	\]
-	Следовательно,
-	\[
-	x\in M\cap M^\perp=\{0\},
-	\]
-	противоречие.
-	
-	Значит, \(\lambda\) не является собственным значением \(\widehat A\). По первой лемме, так как
-	\[
-	\lambda\neq0,
+	A_\lambda x_{n_k}\to0,
 	\]
 	получаем
 	\[
-	\lambda\notin\sigma(\widehat A).
+	A_\lambda x=0.
 	\]
 	Следовательно,
 	\[
-	\lambda\in\rho(\widehat A).
+	x\in\ker A_\lambda.
 	\]
 	
-	\textbf{3. Получим равенство образа и его замыкания.}
-	
-	Из
+	Таким образом,
 	\[
-	\lambda\in\rho(\widehat A)
+	x\in M\cap\ker A_\lambda=\{0\},
 	\]
-	следует, что оператор
+	что противоречит
 	\[
-	\widehat A-\lambda I
+	\|x\|=1.
 	\]
-	отображает \(M^\perp\) на всё \(M^\perp\). То есть
-	\[
-	\operatorname{Im}(\widehat A-\lambda I)=M^\perp.
-	\]
-	Но \(\widehat A-\lambda I\) --- это сужение \(A_\lambda\) на \(M^\perp\). Поэтому
-	\[
-	M^\perp\subset\operatorname{Im}A_\lambda.
-	\]
-	С другой стороны,
+\end{proof}
+
+\begin{lemma}
+	При тех же условиях
 	\[
 	\operatorname{Im}A_\lambda
-	\subset
-	\overline{\operatorname{Im}A_\lambda}
-	=
-	M^\perp.
 	\]
-	Значит,
+	замкнут.
+\end{lemma}
+
+\begin{proof}
+	По предыдущей лемме оператор
 	\[
-	\operatorname{Im}A_\lambda=M^\perp.
+	A_\lambda|_{(\ker A_\lambda)^\perp}
 	\]
-	Так как \(M^\perp\) замкнуто, получаем
+	ограничен снизу. Так как \((\ker A_\lambda)^\perp\) --- банахово пространство,
+	его образ замкнут. Следовательно,
 	\[
 	\operatorname{Im}A_\lambda
-	\text{ замкнут}.
 	\]
+	замкнут.
 \end{proof}
 
 \begin{theorem}[Фредгольма]
-	Пусть \(H\) --- комплексное гильбертово пространство,
+	Пусть
 	\[
-	A\in\mathcal{K}(H)
+	A\in\mathcal K(H)
 	\]
-	--- компактный самосопряженный оператор, и
+	--- компактный самосопряженный оператор и
 	\[
 	\lambda\neq0.
 	\]
 	Тогда
 	\[
-	H=
+	H
+	=
 	\operatorname{Im}A_\lambda
 	\oplus_{\perp}
 	\ker A_\lambda.
@@ -290,24 +139,34 @@
 \end{theorem}
 
 \begin{proof}
-	По разложению из билета 11.2 имеем
+	Так как \(A_\lambda\) самосопряжен, имеем стандартное разложение
 	\[
-	H=
+	H
+	=
 	\overline{\operatorname{Im}A_\lambda}
 	\oplus_{\perp}
 	\ker A_\lambda.
 	\]
+	
 	По предыдущей лемме
+	\[
+	\operatorname{Im}A_\lambda
+	\]
+	замкнут, поэтому
 	\[
 	\overline{\operatorname{Im}A_\lambda}
 	=
 	\operatorname{Im}A_\lambda.
 	\]
+	
 	Следовательно,
 	\[
-	H=
-	\operatorname{Im}A_\lambda
-	\oplus_{\perp}
-	\ker A_\lambda.
+	\boxed{
+		H
+		=
+		\operatorname{Im}A_\lambda
+		\oplus_{\perp}
+		\ker A_\lambda.
+	}
 	\]
 \end{proof}

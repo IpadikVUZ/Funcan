@@ -1,8 +1,855 @@
-% --- Содержимое файла materials/14_1.tex ---
-
 \subsection{Определения и основные свойства. Формула умножения. Преобразование Фурье свертки.}
 
-\begin{remark}
-	TODO: сюда дописывается содержимое билета в том же стиле, что и в конспекте по функциональному анализу--1.
-	Сначала фиксируются нужные определения и формулировки теорем, затем подробно расписываются доказательства без пропуска логических переходов.
-\end{remark}
+\begin{definition}[Преобразование Фурье в \(L_1(\mathbb R)\)]
+	Пусть
+	\[
+	f\in L_1(\mathbb R).
+	\]
+	Преобразованием Фурье функции \(f\) называется функция
+	\[
+	\widehat f(y)
+	=
+	\int_{\mathbb R} f(x)e^{-ixy}\,dx.
+	\]
+\end{definition}
+
+\begin{theorem}[Основные свойства преобразования Фурье]
+	Для любого \(f\in L_1(\mathbb R)\):
+	\begin{enumerate}
+		\item
+		\[
+		\|\widehat f\|_\infty\leq \|f\|_{L_1};
+		\]
+		
+		\item \(\widehat f\) непрерывна;
+		
+		\item
+		\[
+		\widehat f(y)\to0,
+		\qquad |y|\to\infty.
+		\]
+	\end{enumerate}
+	
+	Таким образом,
+	\[
+	\mathcal F:L_1(\mathbb R)\to C_0(\mathbb R)
+	\]
+	--- линейный ограниченный оператор.
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}
+		\item
+		\textbf{Хотим оценить норму \(\widehat f\).}
+		
+		Для любого \(y\in\mathbb R\)
+		\[
+		|\widehat f(y)|
+		=
+		\left|
+		\int_{\mathbb R}f(x)e^{-ixy}\,dx
+		\right|
+		\leq
+		\int_{\mathbb R}|f(x)|\,dx
+		=
+		\|f\|_{L_1}.
+		\]
+		Следовательно,
+		\[
+		\|\widehat f\|_\infty\leq\|f\|_{L_1}.
+		\]
+		
+		\item
+		\textbf{Хотим доказать непрерывность \(\widehat f\).}
+		
+		Пусть \(y_n\to y\). Тогда
+		\[
+		f(x)e^{-ixy_n}\to f(x)e^{-ixy}
+		\]
+		для почти всех \(x\), причем
+		\[
+		|f(x)e^{-ixy_n}|=|f(x)|\in L_1.
+		\]
+		По теореме Лебега
+		\[
+		\widehat f(y_n)\to\widehat f(y).
+		\]
+		
+		\item
+		\textbf{Хотим показать убывание на бесконечности.}
+		
+		Для \(\varphi\in C_c^1(\mathbb R)\) интегрированием по частям получаем
+		\[
+		\widehat\varphi(y)
+		=
+		\frac{1}{iy}
+		\int_{\mathbb R}\varphi'(x)e^{-ixy}\,dx,
+		\]
+		поэтому
+		\[
+		|\widehat\varphi(y)|
+		\leq
+		\frac{\|\varphi'\|_{L_1}}{|y|}
+		\to0.
+		\]
+		
+		Теперь для \(f\in L_1\) выбираем
+		\[
+		\varphi\in C_c^1(\mathbb R),
+		\qquad
+		\|f-\varphi\|_{L_1}<\varepsilon.
+		\]
+		Тогда
+		\[
+		|\widehat f(y)|
+		\leq
+		|\widehat{f-\varphi}(y)|+|\widehat\varphi(y)|
+		\leq
+		\varepsilon+|\widehat\varphi(y)|.
+		\]
+		При достаточно больших \(|y|\)
+		\[
+		|\widehat\varphi(y)|<\varepsilon,
+		\]
+		следовательно,
+		\[
+		|\widehat f(y)|<2\varepsilon.
+		\]
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	Если
+	\[
+	f_n\to f
+	\quad\text{в }L_1,
+	\]
+	то
+	\[
+	\widehat f_n\to\widehat f
+	\quad\text{равномерно на }\mathbb R.
+	\]
+\end{corollary}
+
+\begin{proof}
+	Действительно,
+	\[
+	\|\widehat f_n-\widehat f\|_\infty
+	=
+	\|\widehat{f_n-f}\|_\infty
+	\leq
+	\|f_n-f\|_{L_1}
+	\to0.
+	\]
+\end{proof}
+
+\begin{theorem}[Формула умножения]
+	Если
+	\[
+	f,g\in L_1(\mathbb R),
+	\]
+	то
+	\[
+	\int_{\mathbb R}\widehat f(y)g(y)\,dy
+	=
+	\int_{\mathbb R}f(x)\widehat g(x)\,dx.
+	\]
+\end{theorem}
+
+\begin{proof}
+	\textbf{Хотим поменять порядок интегрирования.}
+	Для этого проверим абсолютную интегрируемость:
+	\[
+	\int_{\mathbb R}\int_{\mathbb R}
+	|f(x)g(y)e^{-ixy}|\,dx\,dy
+	=
+	\|f\|_{L_1}\|g\|_{L_1}
+	<\infty.
+	\]
+	По теореме Фубини
+	\[
+	\begin{aligned}
+		\int_{\mathbb R}\widehat f(y)g(y)\,dy
+		&=
+		\int_{\mathbb R}
+		\left(
+		\int_{\mathbb R}f(x)e^{-ixy}\,dx
+		\right)g(y)\,dy
+		\\
+		&=
+		\int_{\mathbb R}f(x)
+		\left(
+		\int_{\mathbb R}g(y)e^{-ixy}\,dy
+		\right)dx
+		\\
+		&=
+		\int_{\mathbb R}f(x)\widehat g(x)\,dx.
+	\end{aligned}
+	\]
+\end{proof}
+
+\begin{definition}[Свертка]
+	Пусть
+	\[
+	f,g\in L_1(\mathbb R).
+	\]
+	Их сверткой называется функция
+	\[
+	(f*g)(x)
+	=
+	\int_{\mathbb R}f(y)g(x-y)\,dy.
+	\]
+\end{definition}
+
+\begin{theorem}
+	Если
+	\[
+	f,g\in L_1(\mathbb R),
+	\]
+	то
+	\[
+	f*g\in L_1(\mathbb R)
+	\]
+	и
+	\[
+	\|f*g\|_{L_1}
+	\leq
+	\|f\|_{L_1}\|g\|_{L_1}.
+	\]
+\end{theorem}
+
+\begin{proof}
+	\textbf{Хотим показать интегрируемость свертки.}
+	
+	По теореме Тонелли
+	\[
+	\begin{aligned}
+		\|f*g\|_{L_1}
+		&\leq
+		\int_{\mathbb R}\int_{\mathbb R}
+		|f(y)||g(x-y)|\,dy\,dx
+		\\
+		&=
+		\int_{\mathbb R}|f(y)|
+		\left(
+		\int_{\mathbb R}|g(x-y)|\,dx
+		\right)dy
+		\\
+		&=
+		\|f\|_{L_1}\|g\|_{L_1}.
+	\end{aligned}
+	\]
+\end{proof}
+
+\begin{theorem}[Преобразование Фурье свертки]
+	Если
+	\[
+	f,g\in L_1(\mathbb R),
+	\]
+	то
+	\[
+	\widehat{f*g}
+	=
+	\widehat f\,\widehat g.
+	\]
+\end{theorem}
+
+\begin{proof}
+	\textbf{Хотим раскрыть свертку и поменять порядок интегрирования.}
+	
+	Так как
+	\[
+	\int_{\mathbb R}\int_{\mathbb R}
+	|f(y)g(x-y)|\,dy\,dx
+	=
+	\|f\|_{L_1}\|g\|_{L_1}
+	<\infty,
+	\]
+	по теореме Фубини
+	\[
+	\begin{aligned}
+		\widehat{f*g}(z)
+		&=
+		\int_{\mathbb R}
+		\left(
+		\int_{\mathbb R}f(y)g(x-y)\,dy
+		\right)e^{-ixz}\,dx
+		\\
+		&=
+		\int_{\mathbb R}f(y)
+		\left(
+		\int_{\mathbb R}g(x-y)e^{-ixz}\,dx
+		\right)dy.
+	\end{aligned}
+	\]
+	
+	\textbf{Хотим выделить преобразование Фурье функции \(g\).}
+	Делаем замену
+	\[
+	t=x-y.
+	\]
+	Тогда
+	\[
+	\begin{aligned}
+		\widehat{f*g}(z)
+		&=
+		\int_{\mathbb R}f(y)
+		\left(
+		\int_{\mathbb R}g(t)e^{-i(t+y)z}\,dt
+		\right)dy
+		\\
+		&=
+		\left(
+		\int_{\mathbb R}f(y)e^{-iyz}\,dy
+		\right)
+		\left(
+		\int_{\mathbb R}g(t)e^{-itz}\,dt
+		\right)
+		\\
+		&=
+		\widehat f(z)\widehat g(z).
+	\end{aligned}
+	\]
+\end{proof}
+
+\subsection{Преобразование Фурье в пространстве \texorpdfstring{\(L_2(\mathbb R)\)}{L2(R)}}
+
+Рассмотрим пространство Шварца \(S(\mathbb R)\).
+Используем без доказательства следующие факты:
+\[
+\overline{S(\mathbb R)}^{\,L_2}=L_2(\mathbb R),
+\qquad
+\mathcal F:S(\mathbb R)\to S(\mathbb R)
+\]
+--- биекция, причем
+\[
+\|\widehat f\|_{L_2}=\|f\|_{L_2},
+\qquad f\in S(\mathbb R).
+\]
+
+Здесь
+\[
+\widehat f(y)
+=
+\frac{1}{\sqrt{2\pi}}
+\int_{\mathbb R}f(x)e^{-ixy}\,dx.
+\]
+
+Так как \(S(\mathbb R)\) плотно в \(L_2(\mathbb R)\),
+а \(\mathcal F\) является изометрией на \(S\),
+она единственным образом продолжается до линейной изометрии
+\[
+\mathcal F:L_2(\mathbb R)\to L_2(\mathbb R).
+\]
+
+\begin{theorem}[Сохранение скалярного произведения]
+	Для любых
+	\[
+	f,g\in L_2(\mathbb R)
+	\]
+	выполнено
+	\[
+	(f,g)=(\widehat f,\widehat g).
+	\]
+\end{theorem}
+
+\begin{proof}
+	\textbf{Сначала докажем равенство для \(f,g\in S\).}
+	
+	По формуле обращения
+	\[
+	\overline{g(x)}
+	=
+	\frac{1}{\sqrt{2\pi}}
+	\int_{\mathbb R}
+	\overline{\widehat g(y)}e^{-ixy}\,dy.
+	\]
+	
+	По теореме Фубини
+	\[
+	\begin{aligned}
+		(f,g)
+		&=
+		\int_{\mathbb R}f(x)\overline{g(x)}\,dx
+		\\
+		&=
+		\frac{1}{\sqrt{2\pi}}
+		\int_{\mathbb R}\int_{\mathbb R}
+		f(x)\overline{\widehat g(y)}e^{-ixy}\,dy\,dx
+		\\
+		&=
+		\int_{\mathbb R}
+		\widehat f(y)\overline{\widehat g(y)}\,dy
+		\\
+		&=
+		(\widehat f,\widehat g).
+	\end{aligned}
+	\]
+	
+	\textbf{Теперь переходим к \(f,g\in L_2\).}
+	
+	Берем
+	\[
+	f_n,g_n\in S,
+	\qquad
+	f_n\to f,
+	\qquad
+	g_n\to g
+	\quad\text{в }L_2.
+	\]
+	
+	Из непрерывности \(\mathcal F\)
+	\[
+	\widehat f_n\to\widehat f,
+	\qquad
+	\widehat g_n\to\widehat g.
+	\]
+	
+	По непрерывности скалярного произведения
+	\[
+	(f_n,g_n)\to(f,g),
+	\qquad
+	(\widehat f_n,\widehat g_n)
+	\to
+	(\widehat f,\widehat g).
+	\]
+	
+	Так как
+	\[
+	(f_n,g_n)
+	=
+	(\widehat f_n,\widehat g_n),
+	\]
+	переходом к пределу получаем
+	\[
+	(f,g)=(\widehat f,\widehat g).
+	\]
+\end{proof}
+
+\begin{theorem}[Основные свойства преобразования Фурье в \(L_2\)]
+	Для
+	\[
+	\mathcal F:L_2(\mathbb R)\to L_2(\mathbb R)
+	\]
+	выполнено:
+	\begin{enumerate}
+		\item
+		\[
+		\operatorname{Im}\mathcal F=L_2(\mathbb R);
+		\]
+		
+		\item
+		\[
+		\ker\mathcal F=\{0\};
+		\]
+		
+		\item \(\mathcal F\) не является компактным оператором;
+		
+		\item
+		\[
+		\mathcal F^4=I.
+		\]
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}
+		\item
+		\textbf{Хотим доказать сюръективность.}
+		
+		Пусть
+		\[
+		f\in L_2.
+		\]
+		Так как \(S\) плотно в \(L_2\), существуют
+		\[
+		f_n\in S,
+		\qquad
+		f_n\to f.
+		\]
+		
+		Так как
+		\[
+		\mathcal F:S\to S
+		\]
+		--- биекция, для каждого \(n\) существует
+		\[
+		g_n\in S:
+		\qquad
+		\widehat g_n=f_n.
+		\]
+		
+		По изометричности
+		\[
+		\|g_n-g_m\|_{L_2}
+		=
+		\|\widehat g_n-\widehat g_m\|_{L_2}
+		=
+		\|f_n-f_m\|_{L_2}.
+		\]
+		
+		Поэтому \(\{g_n\}\) фундаментальна, а значит
+		\[
+		g_n\to g
+		\]
+		для некоторого \(g\in L_2\).
+		
+		По непрерывности \(\mathcal F\)
+		\[
+		\widehat g_n\to\widehat g.
+		\]
+		Но
+		\[
+		\widehat g_n=f_n\to f,
+		\]
+		следовательно,
+		\[
+		\widehat g=f.
+		\]
+		
+		Значит,
+		\[
+		\operatorname{Im}\mathcal F=L_2.
+		\]
+		
+		\item
+		\textbf{Хотим доказать инъективность.}
+		
+		Если
+		\[
+		\widehat f=0,
+		\]
+		то по изометричности
+		\[
+		\|f\|_{L_2}
+		=
+		\|\widehat f\|_{L_2}
+		=
+		0.
+		\]
+		Следовательно,
+		\[
+		f=0,
+		\]
+		то есть
+		\[
+		\ker\mathcal F=\{0\}.
+		\]
+		
+		\item
+		\textbf{Хотим доказать, что \(\mathcal F\) не компактен.}
+		
+		Предположим противное: \(\mathcal F\) компактен.
+		Тогда композиция
+		\[
+		\mathcal F^4
+		\]
+		также компактна.
+		
+		Но
+		\[
+		\mathcal F^4=I.
+		\]
+		
+		Получаем, что тождественный оператор
+		\[
+		I:L_2\to L_2
+		\]
+		компактен, что невозможно, поскольку \(L_2(\mathbb R)\)
+		бесконечномерно.
+		
+		Следовательно, \(\mathcal F\) не компактен.
+		
+		\item
+		\textbf{Хотим вычислить четвертую степень \(\mathcal F\).}
+		
+		На пространстве \(S\) из формулы обращения следует
+		\[
+		\mathcal F^2f(x)=f(-x).
+		\]
+		
+		Поэтому
+		\[
+		\mathcal F^4f=f,
+		\qquad f\in S.
+		\]
+		
+		Так как \(S\) плотно в \(L_2\), а \(\mathcal F\) непрерывен,
+		равенство продолжается на всё \(L_2\):
+		\[
+		\mathcal F^4=I.
+		\]
+	\end{enumerate}
+\end{proof}
+
+\begin{idea}
+	\textbf{Зачем вообще нужно пространство Шварца и что мы здесь делаем.}
+	
+	В пространстве \(L_1(\mathbb R)\) преобразование Фурье можно определить напрямую:
+	\[
+	\widehat f(y)
+	=
+	\int_{\mathbb R}f(x)e^{-ixy}\,dx,
+	\]
+	поскольку
+	\[
+	\int_{\mathbb R}|f(x)e^{-ixy}|\,dx
+	=
+	\int_{\mathbb R}|f(x)|\,dx
+	<\infty.
+	\]
+	
+	\textbf{В \(L_2\) так сделать нельзя.}
+	
+	Из
+	\[
+	f\in L_2(\mathbb R)
+	\]
+	вообще не следует, что
+	\[
+	f\in L_1(\mathbb R).
+	\]
+	Поэтому для произвольного \(f\in L_2\) интеграл
+	\[
+	\int_{\mathbb R}f(x)e^{-ixy}\,dx
+	\]
+	может не существовать как обычный интеграл.
+	
+	То есть наша цель:
+	\[
+	\boxed{\text{определить преобразование Фурье для всех }f\in L_2}
+	\]
+	но напрямую по интегральной формуле это сделать нельзя.
+	
+	\medskip
+	
+	\textbf{1. Поэтому сначала берем ``хорошие'' функции.}
+	
+	Рассматриваем пространство Шварца
+	\[
+	S(\mathbb R)
+	=
+	\left\{
+	f\in C^\infty(\mathbb R):
+	\sup_{x\in\mathbb R}|x^m f^{(n)}(x)|<\infty
+	\quad
+	\forall m,n\geq0
+	\right\}.
+	\]
+	
+	Смысл условия: функции из \(S\) гладкие и вместе со всеми производными
+	убывают на бесконечности быстрее любой степени.
+	
+	В частности,
+	\[
+	S(\mathbb R)\subset L_1(\mathbb R)\cap L_2(\mathbb R).
+	\]
+	
+	Поэтому для \(f\in S\) интегральная формула преобразования Фурье
+	точно имеет смысл:
+	\[
+	\widehat f(y)
+	=
+	\frac{1}{\sqrt{2\pi}}
+	\int_{\mathbb R}f(x)e^{-ixy}\,dx.
+	\]
+	
+	То есть сначала мы умеем корректно работать с
+	\[
+	\mathcal F:S\to S.
+	\]
+	
+	\medskip
+	
+	\textbf{2. Почему именно \(S\), а не какое-то случайное подпространство?}
+	
+	У пространства Шварца есть два нужных нам свойства,
+	которые используем без доказательства:
+	\[
+	\boxed{\overline{S}^{\,L_2}=L_2}
+	\]
+	и
+	\[
+	\boxed{\mathcal F:S\to S\text{ --- биекция}.}
+	\]
+	
+	Первое означает, что любую функцию
+	\[
+	f\in L_2
+	\]
+	можно приблизить функциями из \(S\):
+	\[
+	f_n\in S,
+	\qquad
+	f_n\to f
+	\quad\text{в }L_2.
+	\]
+	
+	Поэтому, если мы хорошо определим преобразование Фурье на \(S\)
+	и докажем его непрерывность в норме \(L_2\),
+	то сможем распространить его на всё \(L_2\).
+	
+	\medskip
+	
+	\textbf{3. Главное свойство на \(S\) --- Фурье сохраняет норму.}
+	
+	Для \(f\in S\) доказывается равенство Планшереля:
+	\[
+	\|\widehat f\|_{L_2}
+	=
+	\|f\|_{L_2}.
+	\]
+	
+	То есть
+	\[
+	\mathcal F:S\to S
+	\]
+	является изометрией.
+	
+	Это именно то, что позволяет перейти от \(S\) ко всему \(L_2\).
+	
+	\medskip
+	
+	\textbf{4. Как по \(S\) определить Фурье произвольной функции \(f\in L_2\)?}
+	
+	Берем последовательность хороших функций
+	\[
+	f_n\in S,
+	\qquad
+	f_n\to f
+	\quad\text{в }L_2.
+	\]
+	
+	У каждой \(f_n\) преобразование Фурье уже определено обычным интегралом:
+	\[
+	\widehat f_n
+	=
+	\mathcal Ff_n.
+	\]
+	
+	Хотим определить
+	\[
+	\widehat f
+	\]
+	как предел этих преобразований.
+	
+	Из изометричности
+	\[
+	\|\widehat f_n-\widehat f_m\|_{L_2}
+	=
+	\|f_n-f_m\|_{L_2}.
+	\]
+	
+	Так как
+	\[
+	f_n\to f,
+	\]
+	последовательность \(\{f_n\}\) фундаментальна.
+	Следовательно, фундаментальна и
+	\[
+	\{\widehat f_n\}.
+	\]
+	
+	Пространство \(L_2\) полно, поэтому существует
+	\[
+	g\in L_2:
+	\qquad
+	\widehat f_n\to g.
+	\]
+	
+	Именно этот предел и объявляем преобразованием Фурье функции \(f\):
+	\[
+	\boxed{
+		\mathcal Ff
+		:=
+		\lim_{n\to\infty}\mathcal Ff_n
+	}.
+	\]
+	
+	То есть для общей функции \(f\in L_2\)
+	преобразование Фурье определяется уже
+	\textbf{не обязательно обычным интегралом},
+	а пределом в норме \(L_2\).
+	
+	\medskip
+	
+	\textbf{5. Почему результат не зависит от того, как именно мы приблизили \(f\)?}
+	
+	Пусть есть две последовательности
+	\[
+	f_n\to f,
+	\qquad
+	g_n\to f,
+	\qquad
+	f_n,g_n\in S.
+	\]
+	
+	Тогда
+	\[
+	\|f_n-g_n\|_{L_2}\to0.
+	\]
+	
+	По изометричности
+	\[
+	\|\widehat f_n-\widehat g_n\|_{L_2}
+	=
+	\|f_n-g_n\|_{L_2}
+	\to0.
+	\]
+	
+	Значит, обе последовательности преобразований дают один и тот же предел.
+	
+	Следовательно, \(\mathcal Ff\) определено корректно.
+	
+	\medskip
+	
+	\textbf{Итого вся конструкция выглядит так:}
+	\[
+	\boxed{
+		S
+		\overset{\text{плотно}}{\subset}
+		L_2
+	}
+	\]
+	\[
+	\boxed{
+		\mathcal F:S\to S
+		\text{ уже определено обычным интегралом}
+	}
+	\]
+	\[
+	\boxed{
+		\|\mathcal Ff\|_2=\|f\|_2
+	}
+	\]
+	\[
+	\Downarrow
+	\]
+	\[
+	\boxed{
+		\mathcal F
+		\text{ единственным образом продолжается }
+		S\to S
+		\quad\text{до}\quad
+		L_2\to L_2.
+	}
+	\]
+	
+	После этого мы уже изучаем свойства полученного оператора на \(L_2\):
+	\[
+	(f,g)=(\widehat f,\widehat g),
+	\qquad
+	\ker\mathcal F=\{0\},
+	\qquad
+	\operatorname{Im}\mathcal F=L_2,
+	\qquad
+	\mathcal F^4=I,
+	\]
+	и отсюда, в частности, следует, что \(\mathcal F\) не компактен.
+	
+	Таким образом, пространство Шварца здесь нужно не само по себе:
+	это просто удобное плотное множество ``хороших'' функций,
+	на котором преобразование Фурье сначала можно определить
+	и изучить обычными интегралами, а затем по непрерывности
+	перенести на всё \(L_2\).
+\end{idea}
